@@ -20,30 +20,57 @@ Usage:
   python daily_publish_v2.py --force          # skip already-published check
 """
 
+import json
 import sys
 import time
 import random
 import argparse
+import subprocess
 from pathlib import Path
 from datetime import datetime
-from zhihu_publish_common import (
-    ANSWERS_DIR,
-    ARTICLES_DIR,
-    IMAGES_DIR,
-    LOG_FILE,
-    PROJECT_ROOT,
-    browser_session,
-    confirm_or_continue,
-    is_published,
-    load_log,
-    mark_published,
-    setup_logging,
-    validate_content,
-)
 
-ROOT = PROJECT_ROOT
+ROOT = Path(__file__).parent
+ARTICLES_DIR = ROOT / "articles"
+ANSWERS_DIR = ROOT / "answers"
+IMAGES_DIR = ROOT / "images"
+LOG_FILE = ROOT / "publish_log.json"
 
 TODAY = datetime.now().strftime("%Y-%m-%d")
+
+
+def now_str():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def load_log():
+    if LOG_FILE.exists():
+        try:
+            return json.loads(LOG_FILE.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, Exception) as e:
+            print(f"[WARN] publish_log.json 损坏 ({e})，备份为 .bak 后重置")
+            try:
+                bak = LOG_FILE.with_suffix(".json.bak")
+                LOG_FILE.rename(bak)
+                print(f"       已备份到 {bak.name}")
+            except:
+                pass
+    return {"articles": {}, "answers": {}, "last_run": None}
+
+
+def is_published(log, file_key):
+    return file_key in log.get("articles", {}) or file_key in log.get("answers", {})
+
+
+def mark_published(log, file_key, url, title, content_type="articles"):
+    entry = {
+        "url": url,
+        "title": title,
+        "published_at": now_str(),
+        "content_type": content_type
+    }
+    log.setdefault(content_type, {})[file_key] = entry
+    log["last_run"] = now_str()
+    LOG_FILE.write_text(json.dumps(log, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def find_images_for_article(article_file):
@@ -86,29 +113,136 @@ def get_python_cmd():
     return "python"  # 最后尝试，让系统报清晰的错误
 
 
-def publish_article_v4(title, content, image_paths=None, dry_run=False, file_stem=None, shared_context=None):
-    from publish_article_v4 import publish_article_with_images
+def publish_article_v4(title, content, image_paths=None, dry_run=False):
+    """调用 publish_article_v4.py 发布文章（支持配图）"""
+    # 写临时文件（时间戳+进程ID，避免并发冲突）
+    import os
+    tmp_name = f"tmp_publish_article_{int(time.time())}_{os.getpid()}.txt"
+    tmp = ANSWERS_DIR.parent / tmp_name
+    tmp.write_text(title + "\n\n" + content, encoding="utf-8")
 
-    return publish_article_with_images(
-        title,
-        content,
-        image_paths=image_paths,
-        dry_run=dry_run,
-        file_stem=file_stem,
-        shared_context=shared_context,
-    )
+    cmd = [
+        get_python_cmd(), "publish_article_v4.py",
+        "--file", str(tmp),
+    ]
+    if image_paths:
+        imgs_arg = ",".join(image_paths)
+        cmd.extend(["--images", imgs_arg])
+    if dry_run:
+        cmd.append("--dry-run")
+
+    try:
+        result = subprocess.run(
+            cmd, cwd=str(ROOT),
+            capture_output=True, text=True,
+            timeout=300,
+            errors='replace'  # 编码错误用 � 替代（保留信息）
+        )
+    except subprocess.TimeoutExpired:
+        tmp.unlink(missing_ok=True)
+        return {"success": False, "error": "发布超时 (>300s)，可能网络缓慢或触发验证"}
+    except Exception as e:
+        tmp.unlink(missing_ok=True)
+        return {"success": False, "error": f"子进程异常: {e}"}
+
+    # 从输出中提取文章URL
+    url = None
+    if result.stdout:
+        for line in result.stdout.splitlines():
+            if "zhuanlan.zhihu.com/p/" in line:
+                import re
+                m = re.search(r"(https?://zhuanlan\.zhihu\.com/p/\d+)", line)
+                if m:
+                    url = m.group(1)
+                    break
+
+        # dry-run 模式：检查是否有 [DRY-RUN] 标记（大小写不敏感）
+        if not url and "DRY-RUN" in result.stdout.upper():
+            url = "dry-run"
+
+    tmp.unlink(missing_ok=True)
+
+    if result.returncode == 0 and url:
+        return {"success": True, "url": url}
+    else:
+        error_msg = ""
+        if result.stderr:
+            error_msg = result.stderr[-500:]
+        elif result.stdout:
+            error_msg = result.stdout[-500:]
+        return {
+            "success": False,
+            "error": error_msg
+        }
 
 
-def publish_answer_v11(question_url, content, image_path=None, dry_run=False, shared_context=None):
-    from publish_answer_v11 import publish_answer
+def publish_answer_v11(question_url, content, image_path=None, dry_run=False):
+    """调用 publish_answer_v11.py 发布回答（支持配图）"""
+    # 写临时文件（时间戳+进程ID，避免并发冲突）
+    import os
+    tmp_name = f"tmp_publish_answer_{int(time.time())}_{os.getpid()}.txt"
+    tmp = ANSWERS_DIR.parent / tmp_name
+    tmp.write_text(question_url + "\n\n" + content, encoding="utf-8")
 
-    return publish_answer(
-        question_url,
-        content,
-        image_path=image_path,
-        dry_run=dry_run,
-        shared_context=shared_context,
-    )
+    cmd = [
+        get_python_cmd(), "publish_answer_v11.py",
+        "--q", question_url,
+        "--file", str(tmp),
+    ]
+    if image_path:
+        cmd.extend(["--image", image_path])
+    if dry_run:
+        cmd.append("--dry-run")
+
+    try:
+        result = subprocess.run(
+            cmd, cwd=str(ROOT),
+            capture_output=True, text=True,
+            timeout=300,
+            errors='replace'  # 编码错误用 � 替代（保留信息）
+        )
+    except subprocess.TimeoutExpired:
+        tmp.unlink(missing_ok=True)
+        return {"success": False, "error": "发布超时 (>300s)，可能网络缓慢或触发验证"}
+    except Exception as e:
+        tmp.unlink(missing_ok=True)
+        return {"success": False, "error": f"子进程异常: {e}"}
+
+    url = None
+    if result.stdout:
+        for line in result.stdout.splitlines():
+            if "zhihu.com/question/" in line and "/answer/" in line:
+                import re
+                m = re.search(r"(https?://www\.zhihu\.com/question/\d+/answer/\d+)", line)
+                if m:
+                    url = m.group(1)
+                    break
+
+        # v11 的 "LIKELY OK" 场景：表单消失但 URL 未变成 /answer/，仍算发布成功
+        if not url:
+            import re
+            m = re.search(r"\[LIKELY OK\] 表单消失，URL:\s*(https?://www\.zhihu\.com/question/\d+[^\s]*)", result.stdout)
+            if m:
+                url = m.group(1)
+
+        # dry-run 模式：检查是否有 [DRY-RUN] 标记（大小写不敏感）
+        if not url and "DRY-RUN" in result.stdout.upper():
+            url = "dry-run"
+
+    tmp.unlink(missing_ok=True)
+
+    if result.returncode == 0 and url:
+        return {"success": True, "url": url}
+    else:
+        error_msg = ""
+        if result.stderr:
+            error_msg = result.stderr[-500:]
+        elif result.stdout:
+            error_msg = result.stdout[-500:]
+        return {
+            "success": False,
+            "error": error_msg
+        }
 
 
 def print_banner():
@@ -176,8 +310,37 @@ def show_stats():
     print(f"\n  Last run: {log.get('last_run', 'N/A')}")
 
 
+def fetch_latest_invites(dry_run=False):
+    """发布前自动抓取最新邀请回答，更新 invited_questions.json 和 question_bank.json"""
+    print("\n[PRE] 抓取最新邀请回答...")
+    cmd = [get_python_cmd(), "fetch_invited_questions.py", "--max-pages", "5"]
+    if dry_run:
+        cmd.append("--dry-run")
+
+    try:
+        result = subprocess.run(
+            cmd, cwd=str(ROOT),
+            capture_output=True, text=True,
+            timeout=120,
+            errors='replace',
+        )
+        # 打印关键输出（不打印全部，避免太长）
+        if result.stdout:
+            for line in result.stdout.splitlines():
+                if any(kw in line for kw in ['[OK]', '[WARN]', '[ERROR]', '新增', '溢出', '完成', 'pending', 'Cookie']):
+                    print(f"  {line}")
+        if result.returncode != 0:
+            print(f"  [WARN] 邀请抓取退出码 {result.returncode}，但不影响发布流程")
+            if result.stderr:
+                err = result.stderr[-300:]
+                print(f"  {err}")
+    except subprocess.TimeoutExpired:
+        print("  [WARN] 邀请抓取超时（>120s），跳过，不影响发布")
+    except Exception as e:
+        print(f"  [WARN] 邀请抓取异常: {e}，跳过，不影响发布")
+
+
 def main():
-    setup_logging("daily_publish")
     parser = argparse.ArgumentParser(description="WADesk Zhihu Daily Publisher v2")
     parser.add_argument("--articles-only", action="store_true")
     parser.add_argument("--answers-only", action="store_true")
@@ -197,21 +360,14 @@ def main():
 
     print_banner()
     start_time = time.time()
+
+    # 发布前自动抓取最新邀请回答（非致命，失败不阻塞发布）
+    fetch_latest_invites(dry_run=args.dry_run)
+
     article_results = []
     answer_results = []
 
     SKIP_FILES = {"TEMPLATE.txt", "tmp_answer.txt", "tmp_article.txt"}
-    session_cm = None
-    shared_context = None
-
-    def get_shared_context():
-        nonlocal session_cm, shared_context
-        if args.dry_run:
-            return None
-        if shared_context is None:
-            session_cm = browser_session()
-            shared_context = session_cm.__enter__()
-        return shared_context
 
     # --- Publish Articles ---
     if not args.answers_only:
@@ -249,9 +405,7 @@ def main():
                 result = publish_article_v4(
                     title, content,
                     image_paths=imgs if imgs else None,
-                    dry_run=args.dry_run,
-                    file_stem=fp.stem,
-                    shared_context=get_shared_context(),
+                    dry_run=args.dry_run
                 )
                 article_results.append({"file": fp.name, "title": title, **result})
 
@@ -309,8 +463,7 @@ def main():
                 result = publish_answer_v11(
                     q_url, content,
                     image_path=img if img else None,
-                    dry_run=args.dry_run,
-                    shared_context=get_shared_context(),
+                    dry_run=args.dry_run
                 )
                 answer_results.append({"file": fp.name, "title": fp.stem, **result})
 
@@ -327,9 +480,6 @@ def main():
                     time.sleep(wait)
         else:
             print("\n[INFO] No pending answers")
-
-    if session_cm:
-        session_cm.__exit__(None, None, None)
 
     print_summary(article_results, answer_results, start_time)
 
