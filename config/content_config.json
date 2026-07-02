@@ -1,0 +1,907 @@
+{
+  "__version": "v5",
+  "__updated": "2026-06-29",
+  "__note": "v5：扩展内容支柱从5个到10个，新增采购/团队/市场/工具/收款物流5个支柱，覆盖外贸全场景话题",
+  "search_keywords": [
+    "WhatsApp 外贸",
+    "WhatsApp CRM",
+    "外贸客户管理工具",
+    "WhatsApp 多账号",
+    "外贸客户开发",
+    "外贸开发客户方法",
+    "外贸找客户渠道",
+    "外贸B2B平台",
+    "外贸冷门获客",
+    "外贸行业网站",
+    "外贸工具推荐",
+    "外贸SOHO获客",
+    "外贸客户跟丢",
+    "WhatsApp 营销",
+    "外贸防飞单",
+    "外贸跟进客户",
+    "WhatsApp 封号",
+    "出海获客",
+    "外贸B2B获客",
+    "外贸私域运营",
+    "外贸客户交接",
+    "外贸CRM选型",
+    "WhatsApp 工具对比",
+    "外贸销售管理",
+    "WhatsApp 客户管理软件",
+    "工业品外贸",
+    "外贸客户资产",
+    "WhatsApp运营教程",
+    "外贸WhatsApp避坑",
+    "外贸客户管理方法",
+    "外贸独立站获客",
+    "LinkedIn外贸开发",
+    "外贸海关数据",
+    "工业品采购",
+    "怎么找工厂",
+    "供应商验厂",
+    "采购渠道",
+    "B2B采购平台",
+    "1688采购",
+    "工业品供应商",
+    "采购谈判技巧",
+    "供应商管理",
+    "工厂验货",
+    "外贸团队管理",
+    "外贸销售考核",
+    "外贸SOP",
+    "销售团队管理",
+    "外贸销售激励",
+    "外贸新人培训",
+    "销售离职交接",
+    "外贸团队扩张",
+    "外贸行业趋势",
+    "2026外贸趋势",
+    "汽配出口趋势",
+    "东南亚市场",
+    "RCEP外贸",
+    "工业品出口数据",
+    "外贸市场分析",
+    "出口行业报告",
+    "俄语区市场",
+    "海关数据工具",
+    "邮件追踪工具",
+    "AI翻译工具",
+    "外贸Chrome插件",
+    "跨境工具盘点",
+    "外贸软件推荐",
+    "客户开发工具",
+    "外贸AI工具",
+    "外贸收款方式",
+    "T/T付款",
+    "信用证",
+    "外贸物流选择",
+    "国际快递",
+    "清关注意事项",
+    "外贸付款方式",
+    "出口退税",
+    "外贸报关"
+  ],
+  "content_pillars": {
+    "_note": "10根内容支柱，覆盖外贸全场景。pillar 简称用于内部追踪，不出现于正文。",
+    "pillar_tags": {
+      "cmp": "盘点对比",
+      "tut": "实操教程",
+      "bug": "避坑指南",
+      "mtd": "方法论/冷门思路",
+      "chn": "渠道/工具盘点"
+    },
+    "pillars": {
+      "tool_review": {
+        "name": "外贸 WhatsApp 工具测评与实操",
+        "tag": "cmp",
+        "traffic_type": "盘点对比 / 测评 / 教程",
+        "goal": "用干货内容获取搜索流量和推荐流量，自然曝光 WADesk",
+        "keyword_cluster": [
+          "工具对比",
+          "教程",
+          "怎么用",
+          "推荐",
+          "CRM选型",
+          "WhatsApp管理工具",
+          "多账号管理软件"
+        ],
+        "example_headlines": [
+          "外贸WhatsApp多账号管理的3种方案实测（Excel vs 群控 vs CRM）",
+          "外贸CRM怎么选？先给你一个5分钟决策框架",
+          "从0到1搭建外贸团队WhatsApp客户管理体系（附实操清单）"
+        ],
+        "weekly_min": 1
+      },
+      "customer_acquisition": {
+        "name": "外贸获客渠道与工具盘点",
+        "tag": "chn",
+        "traffic_type": "渠道盘点 / 工具推荐 / 冷门方法",
+        "goal": "用高干货密度的获客盘点内容吸引精准流量，末尾自然衔接 WADesk（客户来了之后怎么管）",
+        "keyword_cluster": [
+          "找客户",
+          "开发客户",
+          "获客渠道",
+          "B2B平台",
+          "行业网站",
+          "海关数据",
+          "LinkedIn",
+          "冷门方法",
+          "外贸SOHO"
+        ],
+        "example_headlines": [
+          "我整理了18个外贸人很少知道的B2B行业网站",
+          "外贸找客户的5种冷门方法，第3种你可能没听过",
+          "除了阿里巴巴，工业品外贸还能从哪找客户？5个渠道实测",
+          "外贸SOHO第一年怎么找客户？我试过的渠道全部复盘",
+          "做了3年汽配外贸，总结出海关数据之外找客户的3条野路子"
+        ],
+        "weekly_min": 1
+      },
+      "troubleshooting": {
+        "name": "WhatsApp 运营避坑与合规指南",
+        "traffic_type": "冷门思路 / 避坑清单",
+        "goal": "用避坑/反向思维内容吸引有痛点的精准用户",
+        "keyword_cluster": [
+          "避坑",
+          "封号",
+          "踩坑",
+          "误区",
+          "合规",
+          "运营方法",
+          "账号安全"
+        ],
+        "example_headlines": [
+          "WhatsApp被封号后复盘：我发现自己一直在做这5件蠢事",
+          "为什么有些团队WhatsApp从不封号？不是运气好，是做了3件小事",
+          "WhatsApp运营最大的误区：把群发当成获客",
+          "别等封号了才看：外贸WhatsApp运营的7条安全红线"
+        ],
+        "weekly_min": 1
+      },
+      "methodology": {
+        "name": "外贸客户管理的另类思路",
+        "traffic_type": "教学方法 / 冷门思路",
+        "goal": "用独特的 mental model 吸引想提升认知的外贸从业者",
+        "keyword_cluster": [
+          "方法",
+          "思路",
+          "认知",
+          "底层逻辑",
+          "框架",
+          "方法论",
+          "客户管理"
+        ],
+        "example_headlines": [
+          "90%外贸团队没意识到：客户管理的问题不在管理，在记录",
+          "做了3年汽配外贸，我总结出一个客户跟进的三层模型",
+          "外贸客户管理有一个被严重低估的动作：写备忘录",
+          "为什么你跟进客户总觉得累？因为你把笔记和聊天分开了"
+        ],
+        "weekly_min": 1
+      },
+      "industry_reality": {
+        "name": "工业品外贸实战经验谈",
+        "traffic_type": "经验分享 / 行业观察",
+        "goal": "建立工业品外贸垂直领域的行业认知壁垒",
+        "keyword_cluster": [
+          "汽配",
+          "机械",
+          "工业品",
+          "工厂",
+          "B2B",
+          "长周期",
+          "外贸实战"
+        ],
+        "example_headlines": [
+          "做汽配外贸5年，我见过客户跟进的5种悲剧",
+          "工业品外贸和快消外贸本质上不是一种生意",
+          "一个机械外贸团队的客户管理复盘：从月丢3个客户到0流失",
+          "义乌外贸和东莞外贸的区别，藏在客户管理的方式里"
+        ],
+        "weekly_min": 1
+      },
+      "supplier_sourcing": {
+        "name": "工业品采购与供应商管理",
+        "tag": "chn",
+        "traffic_type": "采购渠道盘点 / 供应商验厂指南 / 谈判技巧",
+        "goal": "覆盖采购决策者（也是工业品出口的潜在客户），双向触达",
+        "keyword_cluster": [
+          "采购渠道",
+          "找工厂",
+          "验厂",
+          "供应商管理",
+          "1688",
+          "谈判技巧",
+          "采购成本"
+        ],
+        "example_headlines": [
+          "工业品采购的6个冷门渠道，第4个90%的人不知道",
+          "怎么判断一个工厂值不值得长期合作？我总结了5个维度",
+          "从1688找工业品供应商，这4个坑我全踩过"
+        ],
+        "weekly_min": 0
+      },
+      "team_building": {
+        "name": "外贸团队管理与销售成长",
+        "tag": "mtd",
+        "traffic_type": "管理方法论 / 团队SOP / 销售成长路径",
+        "goal": "触达老板/销售总监决策者，建立管理认知壁垒",
+        "keyword_cluster": [
+          "团队管理",
+          "销售考核",
+          "SOP",
+          "防止飞单",
+          "销售激励",
+          "新人培训",
+          "离职交接"
+        ],
+        "example_headlines": [
+          "外贸销售离职，客户怎么交接才不丢？我见过最好的做法",
+          "外贸团队从3人到15人，管理上最容易忽略的3件事",
+          "防止飞单，靠制度不如靠这4个动作"
+        ],
+        "weekly_min": 0
+      },
+      "market_intelligence": {
+        "name": "外贸行业趋势与市场分析",
+        "tag": "ins",
+        "traffic_type": "行业趋势 / 市场洞察 / 区域机会",
+        "goal": "做大流量内容，建立行业权威感，长尾流量高",
+        "keyword_cluster": [
+          "行业趋势",
+          "市场分析",
+          "出口数据",
+          "东南亚",
+          "RCEP",
+          "俄语区",
+          "2026趋势"
+        ],
+        "example_headlines": [
+          "2026年工业品出口，这3个区域的机会被严重低估了",
+          "做了5年汽配出口，我看懂了为什么有些市场就是做不进去",
+          "RCEP生效后，工业品出口的这4个变化是真实的"
+        ],
+        "weekly_min": 0
+      },
+      "cross_border_tools": {
+        "name": "跨境工具全景盘点与测评",
+        "tag": "cmp",
+        "traffic_type": "工具盘点 / 测评对比 / 使用教程",
+        "goal": "工具盘点天然高流量高收藏，WADesk作为WhatsApp工具自然出现在盘点中",
+        "keyword_cluster": [
+          "工具推荐",
+          "软件测评",
+          "海关数据工具",
+          "AI工具",
+          "Chrome插件",
+          "邮件追踪",
+          "翻译工具"
+        ],
+        "example_headlines": [
+          "外贸人常用的12个工具盘点：免费的和付费的都测了",
+          "除了WhatsApp和海关数据，这6个小众跨境工具也很能打",
+          "AI翻译工具横评：哪个最适合外贸人日常用？"
+        ],
+        "weekly_min": 0
+      },
+      "payment_logistics": {
+        "name": "跨境收款与物流实操",
+        "tag": "tut",
+        "traffic_type": "收款方式对比 / 物流选择指南 / 清关实操",
+        "goal": "刚需搜索内容，流量精准，适合做入门级干货吸引新粉",
+        "keyword_cluster": [
+          "收款方式",
+          "T/T",
+          "信用证",
+          "物流选择",
+          "清关",
+          "出口退税",
+          "国际快递",
+          "报关"
+        ],
+        "example_headlines": [
+          "外贸收款方式怎么选？T/T、信用证、托收的实话实说",
+          "工业品出口物流，这4个选择直接影响利润率",
+          "清关被卡怎么办？我整理了一份自查清单"
+        ],
+        "weekly_min": 0
+      }
+    }
+  },
+  "buyer_stage_mapping": {
+    "_note": "4个买家阶段，决定内容深度和WADesk植入程度",
+    "awareness": {
+      "name": "问题意识期",
+      "description": "读者还不知道自己有管理问题/效率问题，先建立问题认知",
+      "content_focus": "描述痛点场景，让读者产生'这就是我'的共鸣",
+      "wadesk_mention": "最多一句话带过，不展开功能",
+      "share_of_content": "25%"
+    },
+    "consideration": {
+      "name": "方案比选期",
+      "description": "读者知道有问题，开始对比不同方案（Excel vs CRM，自己做 vs 买工具）",
+      "content_focus": "提供决策框架和对比维度，帮读者建立选型标准",
+      "wadesk_mention": "作为方案之一自然提到，重点讲适合什么场景",
+      "share_of_content": "35%"
+    },
+    "decision": {
+      "name": "决策期",
+      "description": "读者准备选工具，需要降低决策风险",
+      "content_focus": "讲'选之前先搞清楚这几点'，帮读者避坑",
+      "wadesk_mention": "可以展开讲功能，但保持'这是其中一种选择'的客观语气",
+      "share_of_content": "25%"
+    },
+    "implementation": {
+      "name": "使用期",
+      "description": "读者已经在用或准备用工具，需要实操指导",
+      "content_focus": "具体操作步骤、最佳实践、常见问题解决",
+      "wadesk_mention": "可以围绕 WADesk 功能讲实操，但要先给通用建议再带产品",
+      "share_of_content": "15%"
+    }
+  },
+  "headline_formulas": {
+    "_note": "基于知乎高流量内容型的标题公式。回答问题用短公式，文章用展开公式。",
+    "zhihu_answer": [
+      {
+        "name": "翻问题型",
+        "formula": "'{怎么做X}？问题不在X，在于{Y}'",
+        "why_works": "直接否定问题前提，引发好奇心",
+        "example": "'怎么跟进外贸客户？问题不在跟进，在于团队信息没共享'"
+      },
+      {
+        "name": "经验总结型",
+        "formula": "'做了{X年}外贸，我说一个你们不爱听的：{核心观点}'",
+        "why_works": "经验权威 + 反常识 = 高点击",
+        "example": "'做了5年外贸，我说一个你们不爱听的：大部分客户是跟丢的，不是跟不动的'"
+      },
+      {
+        "name": "后果警告型",
+        "formula": "'{常见做法}？先别，你可能会{坏结果}'",
+        "why_works": "Loss aversion —— 人更怕损失",
+        "example": "'群发WhatsApp开发客户？先别，你的号可能活不过这个月'"
+      },
+      {
+        "name": "颠覆常识型",
+        "formula": "'为什么X不X反而Y了？'",
+        "why_works": "认知失调引发阅读冲动",
+        "example": "'为什么我们群发的不封号，精耕细作的反而封了？'"
+      },
+      {
+        "name": "简单方案型",
+        "formula": "'一个简单方法解决{X}：{Y}'",
+        "why_works": "低认知负担，读者觉得'我能学会'",
+        "example": "'一个简单方法防止客户跟丢：每天花2分钟做的事情'"
+      }
+    ],
+    "zhihu_article": [
+      {
+        "name": "结论前置型",
+        "formula": "'{核心结论}：{N}种{X}实测对比'",
+        "why_works": "读者没打开文章就知道能得到什么结论，打开率远高于疑问句标题",
+        "example": "'外贸找客户，免费的比付费的好用——5个渠道实测'"
+      },
+      {
+        "name": "盘点对比型",
+        "formula": "'{N}种{X}方案对比：{方案A vs 方案B vs 方案C}，选哪个？'",
+        "why_works": "对比型内容搜索量大、收藏率高",
+        "example": "'外贸WhatsApp客户管理的3种方案对比：Excel vs 群控软件 vs WhatsApp CRM'"
+      },
+      {
+        "name": "实操教程型",
+        "formula": "'{目标}实操指南：从{起点}到{终点}，{时间承诺}'",
+        "why_works": "教程 = 搜索流量核心来源",
+        "example": "'外贸团队WhatsApp客户管理实操指南：从散乱到体系化，看完就能用'"
+      },
+      {
+        "name": "避坑清单型",
+        "formula": "'{领域}最全避坑清单：这{N}个操作正在毁掉你的{目标}'",
+        "why_works": "损失厌恶 + 清单体 = 高收藏高转发",
+        "example": "'WhatsApp运营避坑清单：这7个操作正在毁掉你的外贸客户关系'"
+      },
+      {
+        "name": "冷门方法论型",
+        "formula": "'{百分比}{人群}没意识到的{领域}真相：{核心观点}'",
+        "why_works": "稀缺性 + 专业感",
+        "example": "'大多数外贸团队没意识到的客户管理盲区：聊天记录不是备份就够了'"
+      },
+      {
+        "name": "场景切入型",
+        "formula": "'{一个具体角色}的{场景}，{结果/转折}'",
+        "why_works": "故事感，让人想点进去看结局",
+        "example": "'一个汽配老板的WhatsApp焦虑：销售离职那天，6个客户跟着丢了'"
+      },
+      {
+        "name": "行业洞察型",
+        "formula": "'{行业A}和{行业B}根本不是一种生意——从{X}说起'",
+        "why_works": "对比冲突 + 认知升级",
+        "example": "'卖手机壳和卖喷油嘴根本不是一种生意——从客户管理说起'"
+      }
+    ]
+  },
+  "feature_to_benefit_to_outcome": {
+    "_note": "写 WADesk 植入时使用此表，把功能转化为读者能感知的结果。不要写功能名，写用了之后什么样。",
+    "chains": [
+      {
+        "feature": "多账号聚合管理",
+        "benefit": "不用反复切换账号，一个界面看所有客户消息",
+        "outcome": "销售从'今天聊了哪几个号'变成'今天聊了哪几个客户'，不再漏消息"
+      },
+      {
+        "feature": "聊天记录云端备份+时间轴",
+        "benefit": "客户历史对话永久保存，任何人打开都能看到完整跟进过程",
+        "outcome": "销售离职后，新人打开时间轴就知道这个客户两年聊了什么，不用重头问"
+      },
+      {
+        "feature": "号码脱敏",
+        "benefit": "销售可以用 WhatsApp 跟客户沟通，但看不到完整号码",
+        "outcome": "员工离职带不走客户联系方式，飞单成本高到不划算"
+      },
+      {
+        "feature": "进粉统计+客户中心",
+        "benefit": "自动汇总每个销售加了哪些客户、从哪来的、状态如何",
+        "outcome": "老板打开看板就知道今天团队进了多少客户、哪个渠道最有效"
+      },
+      {
+        "feature": "自动翻译",
+        "benefit": "输入中文自动转成客户语言发出，收到消息自动翻成中文",
+        "outcome": "聊 10 个国家的客户不用切翻译软件，一个窗口搞定"
+      },
+      {
+        "feature": "客服分流链接",
+        "benefit": "创建 WhatsApp 短链接，客户点击自动分配给在线的销售",
+        "outcome": "官网来的客户不需要人工手动分给销售，系统自动匹配在线的人"
+      },
+      {
+        "feature": "快捷回复+话术库",
+        "benefit": "团队共享常用回复模板，支持动态变量（客户姓名、公司名）",
+        "outcome": "新销售不需要背话术，搜关键词一秒发出标准化回复"
+      },
+      {
+        "feature": "发送间隔+安全暂停",
+        "benefit": "群发时自动控制发送节奏，模拟真人操作频率",
+        "outcome": "群发触达率更高，不是因为内容好，是 WhatsApp 没觉得你在群发"
+      },
+      {
+        "feature": "AI Copilot",
+        "benefit": "AI 分析聊天内容，自动给客户打意向标签并给出回复建议",
+        "outcome": "不用每天翻聊天记录找重点客户，AI 帮你标记好了该追谁的节奏"
+      }
+    ]
+  },
+  "social_proof_techniques": {
+    "_note": "不虚构案例、不编造数据的前提下，合法增强说服力的表达方式。写内容时自然穿插 1-2 处。",
+    "observational": [
+      "过去一年我接触了20多家做工业品出口的团队……",
+      "做汽配的朋友聊了一圈，发现WhatsApp管理上踩的坑惊人一致……",
+      "几个做机械外贸的老板跟我说过类似的问题……",
+      "从我见过的外贸团队来看，3个销售管10个号是效率的拐点……"
+    ],
+    "behavioral_consensus": [
+      "外贸圈里但凡团队超过5个人的，基本都在找客户管理的解决方案……",
+      "做工业品出口的都知道，一个客户聊两年不下单是常态……",
+      "这种痛不是个例——我见过至少10个外贸团队因此丢过客户……"
+    ],
+    "problem_validation": [
+      "这不是个别销售不靠谱，而是没有系统的时候，谁都会漏……",
+      "做过外贸管理的都知道，客户信息散落在不同人手里是最大的隐患……",
+      "你说这是小问题，但我见过为这赔掉几十万订单的团队……"
+    ]
+  },
+  "loss_aversion_templates": {
+    "_note": "Loss Aversion 表达模板。每篇内容至少使用 1-2 个。核心逻辑：让读者意识到不做某事的代价，比说做了有什么好处更有效。",
+    "customer_asset_loss": [
+      "销售离职那天，你才知道客户都在他手机里——那时候再挽回，成本是本来该做的10倍",
+      "每一个没备份的聊天记录，都是一个可能丢掉的客户订单",
+      "你现在觉得无所谓，等到真丢了一个跟了两年的客户就知道疼了"
+    ],
+    "efficiency_loss": [
+      "每天花30分钟切号翻译，一年下来就是15个工作日——用这些时间能多聊多少客户？",
+      "客户问了报价你翻了10分钟聊天记录才找到——这个客户可能已经去问别人了",
+      "你团队里每个人每天花在'找信息'上的时间，加起来可能比一个人全天工作时间还多"
+    ],
+    "opportunity_cost": [
+      "一个没跟进好的客户，不只丢了一个订单，是丢了未来3年可能带来的所有订单",
+      "你没看到的不是飞单，是飞单背后本该属于公司的客户生命周期价值",
+      "眼前省了几千块工具费，长远来看丢掉的可能是几十万的客户关系"
+    ],
+    "risk_exposure": [
+      "没有聊天监控的团队，出问题的时候你是最后一个知道的——而且是客户告诉你的",
+      "不做客户信息沉淀的公司，规模越大风险越大，5个人和50个人的风险不在一个量级",
+      "封号不是最大的损失，封号时没备份的聊天记录才是"
+    ]
+  },
+  "answer_spec": {
+    "min_chars": 300,
+    "max_chars": 800,
+    "min_image_placeholders": 0,
+    "_persona": "出海专家 + 互联网产品人双重视角。不是纯销售，也不是纯技术——做过产品、接触大量出海团队、对外贸业务有深度理解的人。用产品思维分析外贸问题，用行业经验验证产品方案。",
+    "structure": [
+      "开头直接亮观点/给判断（口语化，像在知乎评论区回复一样自然）",
+      "核心观点展开（不要'第一第二第三'，用口语化分点，段落长短不齐）",
+      "落地案例（1个具体行业的具体场景，要有'谁做了什么结果怎样'的完整链条）",
+      "WADesk植入：可选，仅在内容自然衔接时轻提一句。不要放链接"
+    ],
+    "hard_rules": [
+      "正文不出现'标品''非标品'",
+      "禁止'不是……而是……'句式",
+      "禁止Markdown表格",
+      "禁止虚构具体数据（如'87%的外贸企业''提升了3倍效率'）",
+      "禁止'随着全球化深入''本文将从以下''综上所述''总而言之'等AI模板开头/结尾",
+      "至少1处 loss_aversion_templates 中的表达（让读者感到不做某事有代价）",
+      "至少1处 social_proof_techniques 中的表达（用观察/共识/问题验证增强可信度）",
+      "段落必须长短不齐：有的段落1行，有的段落3-5行，严禁每段字数接近",
+      "必须出现1-2处口语化表达（'说白了''这事儿''说实话''说句不好听的''讲真'）",
+      "必须出现1处不确定表达（'可能''大概''我觉得''不一定''看情况'）",
+      "回答不配图片，纯文字（降低AI检测风险）",
+      "WADesk植入：仅在末尾自然带一句，不要整段宣传。不要放链接。",
+      "必须有至少1个完整案例：谁（具体角色+行业）、什么场景、做了什么、结果怎样",
+      "案例不能空泛——不能用'我见过一个企业'，要用'深圳做汽配的朋友''宁波做螺丝出口的王总'"
+    ],
+    "_anti_ai_good_examples": [
+      {
+        "rule": "口语化开头",
+        "good": "这事儿其实没你想的那么复杂。我们团队之前也踩过坑……",
+        "bad": "关于WhatsApp自动翻译这个问题，我认为可以从以下几个维度来分析："
+      },
+      {
+        "rule": "段落长短不齐",
+        "good": "说白了就是三个动作。\n\n第一，号码别一次性导入太多。你一次丢500个进去，WhatsApp不管你才怪。\n\n第二，发的时候要有节奏。别机器咔咔咔一秒一条，正常人谁这么聊天？\n\n第三，内容得有变化。",
+        "bad": "关于避免封号，有以下三点建议：\n\n第一，控制单次导入数量。\n\n第二，设置合理的发送间隔。\n\n第三，使用多样化的话术模板。"
+      },
+      {
+        "rule": "不确定表达增加真人感",
+        "good": "我觉得大概分两种情况吧。如果你是做快消的，群发可能确实还能跑一阵子。但工业品……大概率不行。",
+        "bad": "根据不同行业特性，我们可以将解决方案分为两类：快消品行业适用A方案，工业品行业适用B方案。"
+      },
+      {
+        "rule": "案例要具体到人和场景",
+        "good": "我一个朋友做汽配出口的，去年销售走了两个，直接带了6个客户走。后来他上了套系统把聊天记录都沉淀下来，今年又走了一个销售，这次一个客户都没丢。",
+        "bad": "某外贸企业在实施CRM系统后，有效降低了客户流失率，提升了团队协作效率。"
+      },
+      {
+        "rule": "WADesk植入要轻",
+        "good": "我们现在自己用的工具就是把聊天记录自动存云端，换人的时候新销售打开时间轴就能接着聊。有兴趣可以搜WADesk看看，不对胃口就算了。",
+        "bad": "推荐使用WADesk这款专业的WhatsApp CRM管理系统，它拥有多账号聚合管理、智能翻译、AI Copilot等强大功能，能够帮助您的企业实现数字化转型，提升客户管理效率。欢迎访问官网了解更多：https://wadesk.io/cn"
+      }
+    ],
+    "_anti_ai_forbidden_patterns": [
+      "'随着……的发展/深入/推进'",
+      "'本文将从以下……方面展开'",
+      "'综上所述/总而言之/一言以蔽之'",
+      "'不是……而是……/重要的不是……而是……'",
+      "'首先……其次……再次……最后……'",
+      "'值得注意的是/毋庸置疑的是/显而易见的是'",
+      "'在当今数字化时代背景下'",
+      "'X%的企业/用户/团队'（无来源的具体数据）",
+      "'让我们来……/让我们一起……'",
+      "'希望能对您有所帮助/希望以上内容能够给您带来启发'",
+      "每段开头都是同一句式",
+      "所有段落长度都在3-4行左右（过于均匀）",
+      "连续3个以上排比句"
+    ]
+  },
+  "article_spec": {
+    "min_chars": 2200,
+    "max_chars": 3500,
+    "min_image_placeholders": 2,
+    "content_types": {
+      "_priority_order": "优先使用高流量型。每篇文章明确属于以下之一。",
+      "comparison": {
+        "name": "盘点对比",
+        "traffic_potential": "极高",
+        "structure": [
+          "【结论前置】开头直接给核心结论——哪种情况下选哪种（一句话概括所有对比结果，让读者不打开也知道值不值得读）",
+          "列出对比维度（价格/功能/适用规模/上手门槛/效果实测）",
+          "逐个方案/渠道分析（优缺点都说，不止说好话）",
+          "给决策建议（'如果你X就选A，如果你Y就选B'）",
+          "自然带出WADesk——只讲'客户来了之后怎么管'的衔接，不讲功能"
+        ],
+        "length": "2500-3200字",
+        "example_angles": [
+          "Excel vs 群控 vs WhatsApp CRM",
+          "免费获客渠道 vs 付费 B2B 平台",
+          "海关数据 vs LinkedIn vs 行业展会"
+        ]
+      },
+      "tutorial": {
+        "name": "实操教程",
+        "traffic_potential": "极高",
+        "structure": [
+          "为什么需要做这件事（痛点引入）",
+          "前置准备（列出需要什么）",
+          "步骤拆解（每步有操作要点+常见坑）",
+          "收尾检查清单",
+          "自然带出WADesk（'如果你觉得手动做这些太麻烦……'）"
+        ],
+        "length": "2500-3000字",
+        "example_angles": [
+          "从0搭建WhatsApp客户管理体系",
+          "WhatsApp客户分层实操步骤",
+          "外贸团队客户交接SOP搭建"
+        ]
+      },
+      "troubleshooting": {
+        "name": "避坑指南",
+        "traffic_potential": "高",
+        "structure": [
+          "先讲一个真实的坑（场景引入）",
+          "列出N个常见坑，每个坑讲清'为什么是坑'+'怎么避免'",
+          "给一个自查清单",
+          "自然带出WADesk"
+        ],
+        "length": "2200-2800字",
+        "example_angles": [
+          "WhatsApp运营最常见的N个坑",
+          "外贸CRM选型N个坑",
+          "客户管理最容易忽视的风险"
+        ]
+      },
+      "methodology": {
+        "name": "方法论/另类思路",
+        "traffic_potential": "高",
+        "structure": [
+          "反常识观点或框架引入",
+          "逐层展开逻辑",
+          "对比常规做法说明为什么这个思路更好",
+          "落地建议（可以怎么做）",
+          "自然带出WADesk"
+        ],
+        "length": "2200-2800字",
+        "example_angles": [
+          "客户管理不是管客户是管信息",
+          "跟进效率的底层逻辑不是话术是上下文"
+        ]
+      }
+    },
+    "structure": [
+      "标题使用 headline_formulas 中文章型公式",
+      "前80%：按所选 content_type 的结构写干货",
+      "后20%：自然带出 WADesk（使用 feature_to_benefit_to_outcome 转化链路）",
+      "末尾 CTA：不超过40字短句，纯自然表达（不要促销语气）",
+      "配图建议（2张图）"
+    ],
+    "hard_rules": [
+      "正文不出现'标品''非标品'",
+      "禁止'不是……而是……'句式",
+      "禁止Markdown表格",
+      "禁止虚构具体数据",
+      "禁止'随着全球化深入''本文将从以下''综上所述'等AI模板",
+      "至少2处 loss_aversion_templates 中的表达",
+      "至少1处 social_proof_techniques 中的表达",
+      "正文中不出现任何内部分类标注（content_type/pillar/buyer_stage等），仅用于自动化内部追踪",
+      "开头200字内亮出核心观点/结论（方便搜索引擎抓取 + 提高打开率）",
+      "干货结论前置：对比/盘点型文章，开头先给结论再展开解释，不要让读者等"
+    ]
+  },
+  "article_titles": [
+    {
+      "title": "外贸WhatsApp客户管理的3种方案实测：Excel vs 群控 vs WhatsApp CRM",
+      "pillar": "tool_review",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "外贸找客户的5种冷门方法，第3种90%的人没用过",
+      "pillar": "customer_acquisition",
+      "content_type": "comparison",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "我整理了18个工业品外贸人很少知道的B2B行业网站",
+      "pillar": "customer_acquisition",
+      "content_type": "comparison",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "除了阿里巴巴，工业品外贸还能从哪找客户？5个渠道实测",
+      "pillar": "customer_acquisition",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "外贸SOHO第一年怎么找客户？我试过的所有渠道全部复盘",
+      "pillar": "customer_acquisition",
+      "content_type": "tutorial",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "做了3年汽配外贸，总结出海关数据之外找客户的3条野路子",
+      "pillar": "customer_acquisition",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "从0到1搭建外贸团队WhatsApp客户管理体系——实操指南",
+      "pillar": "tool_review",
+      "content_type": "tutorial",
+      "buyer_stage": "implementation"
+    },
+    {
+      "title": "WhatsApp运营最容易被忽视的7个坑——我踩过3个，你呢？",
+      "pillar": "troubleshooting",
+      "content_type": "troubleshooting",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸客户管理有一个被严重低估的动作：写备忘录",
+      "pillar": "methodology",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸客户开发工具大盘点：从Google到海关数据，这6类工具够用了",
+      "pillar": "customer_acquisition",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "为什么有些外贸团队WhatsApp从不封号——不是运气好，是做了这4件小事",
+      "pillar": "troubleshooting",
+      "content_type": "troubleshooting",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "外贸客户跟进的底层逻辑不是话术——是信息上下文的完整性",
+      "pillar": "methodology",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "做汽配外贸5年，我见过客户跟进的5种死法",
+      "pillar": "industry_reality",
+      "content_type": "troubleshooting",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸CRM怎么选？一个5分钟决策框架帮你理清思路",
+      "pillar": "tool_review",
+      "content_type": "comparison",
+      "buyer_stage": "decision"
+    },
+    {
+      "title": "卖手机壳和卖喷油嘴根本不是一种生意——从客户管理方式说起",
+      "pillar": "industry_reality",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸团队从3人到10人，客户管理体系怎么跟着升级？",
+      "pillar": "troubleshooting",
+      "content_type": "tutorial",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "做了3年外贸才明白：客户管理的本质不是管客户，是管信息",
+      "pillar": "methodology",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸客户交接这件事，大多数团队都做反了",
+      "pillar": "methodology",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "工业品外贸为什么不能用快消的思路做客户管理？",
+      "pillar": "industry_reality",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸人必须收藏的5个免费海关数据查询网站",
+      "pillar": "customer_acquisition",
+      "content_type": "comparison",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "工业品采购的6个冷门渠道，第4个90%采购人不知道",
+      "pillar": "supplier_sourcing",
+      "content_type": "comparison",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "怎么判断一个工厂值不值得长期合作？5个维度帮你避坑",
+      "pillar": "supplier_sourcing",
+      "content_type": "tutorial",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "从1688找工业品供应商，这4个坑我全踩过",
+      "pillar": "supplier_sourcing",
+      "content_type": "troubleshooting",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸销售离职，客户怎么交接才不丢？我见过最好的做法",
+      "pillar": "team_building",
+      "content_type": "tutorial",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "外贸团队从3人到15人，管理上最容易忽略的3件事",
+      "pillar": "team_building",
+      "content_type": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "防止飞单，靠制度不如靠这4个动作",
+      "pillar": "team_building",
+      "content_type": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "2026年工业品出口，这3个区域的机会被严重低估了",
+      "pillar": "market_intelligence",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "做了5年汽配出口，我看懂了为什么有些市场就是做不进去",
+      "pillar": "market_intelligence",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "外贸人常用的12个工具盘点：免费的和付费的都测了",
+      "pillar": "cross_border_tools",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "除了WhatsApp和海关数据，这6个小众跨境工具也很能打",
+      "pillar": "cross_border_tools",
+      "content_type": "comparison",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "AI翻译工具横评：哪个最适合外贸人日常用？",
+      "pillar": "cross_border_tools",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "外贸收款方式怎么选？T/T、信用证、托收的实话实说",
+      "pillar": "payment_logistics",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "工业品出口物流，这4个选择直接影响你的利润率",
+      "pillar": "payment_logistics",
+      "content_type": "comparison",
+      "buyer_stage": "consideration"
+    },
+    {
+      "title": "清关被卡怎么办？我整理了一份实操清单",
+      "pillar": "payment_logistics",
+      "content_type": "tutorial",
+      "buyer_stage": "implementation"
+    },
+    {
+      "title": "外贸SOHO和贸易公司，客户管理方式根本不一样——从信息沉淀说起",
+      "pillar": "methodology",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "title": "做了3年外贸，我总结出一个客户开发的漏斗模型",
+      "pillar": "customer_acquisition",
+      "content_type": "methodology",
+      "buyer_stage": "awareness"
+    }
+  ],
+  "image_spec": {
+    "generate_per_piece": 2,
+    "max_product_images": 1,
+    "product_image_position": "文末工具部分",
+    "preferred_types": [
+      "对比图（方案对比/行业对比，信息图风格）",
+      "流程图（客户管理流程/客户资产流失路径）",
+      "场景示意图（团队多账号管理场景）",
+      "架构图（WhatsApp客户管理体系）",
+      "避坑清单可视化"
+    ],
+    "output_dir": "zhihu_auto/images/"
+  }
+}

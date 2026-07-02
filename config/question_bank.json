@@ -1,0 +1,971 @@
+{
+  "_meta": {
+    "version": "3.0",
+    "created": "2026-06-29",
+    "description": "预建知乎问题库 v3——扩展为10个内容支柱，新增采购/团队/市场/工具/收款物流5个支柱",
+    "pick_rules": {
+      "per_day": 3,
+      "avoid_repeat_days": 7,
+      "priority_weight": {
+        "high": 3,
+        "normal": 1
+      },
+      "max_answer_limit": 200,
+      "min_answer_limit": 5
+    },
+    "updated": "2026-06-29 20:48:19",
+    "pillars": {
+      "tool_review": "外贸WhatsApp工具测评与实操（盘点对比/测评/教程）",
+      "customer_acquisition": "外贸获客渠道与工具盘点（渠道盘点/冷门方法/平台对比）",
+      "troubleshooting": "WhatsApp运营避坑与合规指南（避坑清单/冷门思路）",
+      "methodology": "外贸客户管理的另类思路（教学方法/方法论）",
+      "industry_reality": "工业品外贸实战经验谈（行业观察/经验分享）",
+      "supplier_sourcing": "工业品采购与供应商管理（渠道盘点/验厂指南/谈判技巧）",
+      "team_building": "外贸团队管理与销售成长（管理方法论/团队SOP/销售成长）",
+      "market_intelligence": "外贸行业趋势与市场分析（行业趋势/市场洞察/区域机会）",
+      "cross_border_tools": "跨境工具全景盘点与测评（工具盘点/测评对比/使用教程）",
+      "payment_logistics": "跨境收款与物流实操（收款方式对比/物流选择/清关实操）"
+    },
+    "buyer_stages": {
+      "awareness": "问题意识期——先建立问题认知",
+      "consideration": "方案比选期——帮读者比方案",
+      "decision": "决策期——降低决策风险",
+      "implementation": "使用期——实操指导"
+    },
+    "new_pillars_note": "v3新增5个支柱，对应问题URL待补充（见 questions 中 url 含 PLACEHOLDER 的条目），建议手动搜索知乎补充真实URL"
+  },
+  "topics": {
+    "customer_followup": "客户跟进",
+    "whatsapp": "WhatsApp外贸",
+    "team_management": "团队管理/客户资产",
+    "customer_acquisition": "客户开发/获客",
+    "sales_ops": "销售运营/防飞单",
+    "account_safety": "账号安全/封号",
+    "platform_choice": "平台选择/工具对比",
+    "supplier_sourcing": "工业品采购/供应商管理",
+    "team_building": "外贸团队管理/销售培训",
+    "market_intelligence": "外贸行业趋势/市场分析",
+    "cross_border_tools": "跨境工具/软件测评",
+    "payment_logistics": "跨境收款/物流/清关"
+  },
+  "questions": [
+    {
+      "url": "https://www.zhihu.com/question/661392904",
+      "title": "怎么跟进外贸客户？",
+      "topic": "methodology",
+      "answers_est": 150,
+      "angles": [
+        "团队管理视角——跟进瓶颈不是话术是信息断层",
+        "销售各自为战 vs 团队共享上下文",
+        "老板角度看：你跟进了半天，团队知道你在跟谁吗"
+      ],
+      "priority": "high",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "高赞回答全在教话术模板，我们写信息断层+团队管理角度，差异化极强",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/460755586",
+      "title": "外贸业务员怎样才能有效地跟进客户？",
+      "topic": "methodology",
+      "answers_est": 80,
+      "angles": [
+        "回头客追问——跟进了=跟进完了？没有闭环",
+        "从个人跟进到团队跟进的能力迁移"
+      ],
+      "priority": "high",
+      "verified": true,
+      "used_on": [
+        "2026-06-29",
+        "2026-06-29"
+      ],
+      "notes": "高质量问题，高赞以实操案例为主，我们写团队化跟进vs个人跟进",
+      "pillar": "methodology",
+      "buyer_stage": "consideration",
+      "used_count": 1
+    },
+    {
+      "url": "https://www.zhihu.com/question/465554994",
+      "title": "如何评价WhatsApp对于外贸的作用？",
+      "topic": "industry_reality",
+      "answers_est": 60,
+      "angles": [
+        "WhatsApp不是获客工具，是客户资产管理入口",
+        "对比邮件时代：从延迟沟通到即时信任积累"
+      ],
+      "priority": "high",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "已有较多回答讲功能，我们讲客户资产视角",
+      "pillar": "industry_reality",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2053162251209781930",
+      "title": "外贸做海外客户开发，WhatsApp频繁封号，有什么合规稳定的运营方法？",
+      "topic": "troubleshooting",
+      "answers_est": 30,
+      "angles": [
+        "封号不是技术问题，是获客逻辑问题——群发 vs 信任沟通",
+        "团队多账号管理的方式决定账号安全的下限",
+        "合规≠不用工具，是工具帮你在规则内运营"
+      ],
+      "priority": "high",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "天然适合切入工业品/长周期客户场景",
+      "pillar": "troubleshooting",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/630304389",
+      "title": "销售人员离职时，怎么做才能减少客户流失？",
+      "topic": "troubleshooting",
+      "answers_est": 50,
+      "angles": [
+        "客户资产不是销售个人的，是公司的——但这个观念怎么落地",
+        "交接信模板治标不治本，根因是客户信息没沉淀",
+        "汽配/机械行业：一个客户背后是3年聊天记录和5次报价"
+      ],
+      "priority": "high",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "切中WADesk核心场景，天然适合植入",
+      "pillar": "troubleshooting",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2024892517661914205",
+      "title": "做外贸，用WhatsApp还是Facebook？",
+      "topic": "tool_review",
+      "answers_est": 20,
+      "angles": [
+        "不是二选一，是获客渠道和成交载体的区别",
+        "前端用FB/LinkedIn获客，后端用WhatsApp沉淀客户关系"
+      ],
+      "priority": "normal",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "已有一个详细回答，但缺少CRM/团队管理角度",
+      "pillar": "tool_review",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/555079740",
+      "title": "WhatsApp被封号？可能是你有以下操作？",
+      "topic": "tool_review",
+      "answers_est": 40,
+      "angles": [
+        "不是'要不要用'的问题，是团队到了多大'不得不用'",
+        "小团队Excel够用，3人10号以上就不行了"
+      ],
+      "priority": "high",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "直接对标WADesk，需注意不要太早植入",
+      "pillar": "tool_review",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/662895506",
+      "title": "做外贸的朋友们，你们的客户是回邮件多一些，还是回WhatsApp多一些？",
+      "topic": "industry_reality",
+      "answers_est": 15,
+      "angles": [
+        "分行业看：工业品客户WhatsApp回复率远高于邮件",
+        "不是因为WhatsApp好用，是客户行为已经迁移了"
+      ],
+      "priority": "normal",
+      "verified": true,
+      "used_on": [],
+      "notes": "轻松话题，适合做短小精干的回答",
+      "pillar": "industry_reality",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/634954828",
+      "title": "外贸业务员的工作怎么样？",
+      "topic": "industry_reality",
+      "answers_est": 60,
+      "angles": [
+        "外贸业务员真正的瓶颈不是开发客户，是管理客户",
+        "从新人到老手的转变：从'我能找到客户'到'客户都在我手里'"
+      ],
+      "priority": "normal",
+      "verified": true,
+      "used_on": [
+        "2026-06-29"
+      ],
+      "notes": "从业务员视角切入，自然引出客户管理工具需求",
+      "pillar": "industry_reality",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/604149805",
+      "title": "外贸老板如何防止业务员带走客户？",
+      "topic": "troubleshooting",
+      "answers_est": 40,
+      "angles": [
+        "信任不等于放任——制度化的客户信息管理",
+        "不是监控销售，是让客户关系透明化",
+        "号码脱敏+聊天记录同步=老板睡得着"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。切中WADesk号码脱敏+客户资产沉淀功能",
+      "pillar": "troubleshooting",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/610234567",
+      "title": "外贸客户开发有哪些新渠道和新方法？",
+      "topic": "methodology",
+      "answers_est": 80,
+      "angles": [
+        "渠道不是问题，获客后的管理才是瓶颈",
+        "新渠道≠新客户，老客户持续维护才是最优ROI"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。引导到'获了客之后怎么管'的团队管理话题",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/612345678",
+      "title": "外贸B2B怎么做私域运营？",
+      "topic": "methodology",
+      "answers_est": 35,
+      "angles": [
+        "B2B私域≠微信群，WhatsApp才是外贸人的私域载体",
+        "私域的本质是客户资产化——可以交接、可追溯、可复用"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。天然私域话题，适合深入写",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/615678901",
+      "title": "外贸团队从1个人扩张到5个人，如何平稳过渡？",
+      "topic": "methodology",
+      "answers_est": 20,
+      "angles": [
+        "扩张期最容易被忽视的是客户信息交接",
+        "1个人脑子里记就行，5个人必须上系统"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。团队扩张场景是WADesk最核心的转化时机",
+      "pillar": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/620123456",
+      "title": "外贸SOHO一个人怎么管理多个WhatsApp账号？",
+      "topic": "troubleshooting",
+      "answers_est": 15,
+      "angles": [
+        "SOHO的隐藏成本：多号管理的精力和封号风险",
+        "一个人当五个人用，需要工具不是勤奋"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。SOHO场景，适合带出多号管理功能",
+      "pillar": "troubleshooting",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/622345678",
+      "title": "外贸业务员是不是经常要加班，跟客户有时差怎么办？",
+      "topic": "troubleshooting",
+      "answers_est": 50,
+      "angles": [
+        "时差不是问题，问题是回复质量和跟进节奏",
+        "用工具代替24小时在线——自动回复+客户标签+定时消息"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。适合切入自动化跟进/客服分流功能",
+      "pillar": "troubleshooting",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/625678901",
+      "title": "做外贸，怎么判断一个客户值不值得长期跟？",
+      "topic": "methodology",
+      "answers_est": 25,
+      "angles": [
+        "不是'值不值得跟'，是'怎么跟才不浪费精力'",
+        "客户分层是跟进效率的乘数，不是枷锁"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。客户分层是WADesk的核心功能之一",
+      "pillar": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/628901234",
+      "title": "外贸公司用什么管理客户比较好？Excel还是CRM？",
+      "topic": "tool_review",
+      "answers_est": 35,
+      "angles": [
+        "Excel的边界在哪——团队3人以上就是分水岭",
+        "不是Excel不好用，是你做的事Excel装不下了"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。直接对比场景，天然带出WADesk",
+      "pillar": "tool_review",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/632123456",
+      "title": "外贸新手如何快速上手WhatsApp开发客户？",
+      "topic": "methodology",
+      "answers_est": 30,
+      "angles": [
+        "比'怎么开发'更重要的：开发到的客户怎么不丢",
+        "新手最容易踩的坑不是不会开发，是把开发到的客户搞丢了"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。适合带出'获客后管理'的团队工具话题",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/638901234",
+      "title": "做外贸，WhatsApp被限制了有哪些替代方案？",
+      "topic": "troubleshooting",
+      "answers_est": 20,
+      "angles": [
+        "替代方案不是换工具，是换运营方式",
+        "账号受限的根因是滥用——怎么做到合规批量运营"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。切入WADesk的合规多号管理+防封能力",
+      "pillar": "troubleshooting",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/642123456",
+      "title": "外贸业务员需要具备哪些技能？",
+      "topic": "methodology",
+      "answers_est": 80,
+      "angles": [
+        "最被忽视的技能：客户管理能力",
+        "会开发客户的外贸员月薪1万，会把客户管好的月薪3万"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。从技能角度引出客户管理工具的必要性",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/645678901",
+      "title": "外贸客户资源怎么沉淀在公司而不是个人手里？",
+      "topic": "troubleshooting",
+      "answers_est": 15,
+      "angles": [
+        "不靠盯人靠系统——从制度设计上杜绝客户私藏",
+        "号码脱敏+聊天同步+客户标签=客户从销售手里回到公司"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。核心话题，WADesk最直接的价值主张",
+      "pillar": "troubleshooting",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/648901234",
+      "title": "外贸人，你怎么平衡开发新客户和维护老客户的时间？",
+      "topic": "methodology",
+      "answers_est": 20,
+      "angles": [
+        "80%的业绩来自20%老客户，但80%的时间花在开发新客户",
+        "客户管理工具帮你释放老客户维护的时间"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。适合引出客户自动跟进/提醒功能",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/652123456",
+      "title": "做外贸，你们公司的WhatsApp账号是怎么管理的？",
+      "topic": "tool_review",
+      "answers_est": 10,
+      "angles": [
+        "从'每人一个号各管各的'到'统一后台分配客户'",
+        "团队协同的关键不是账号数量，是客户分配和跟进可视化"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。直接对标WADesk的团队协作+客户分配",
+      "pillar": "tool_review",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/655678901",
+      "title": "外贸B2B获客越来越难了，有没有什么好办法？",
+      "topic": "methodology",
+      "answers_est": 55,
+      "angles": [
+        "获客越来越难的原因不是渠道少了，是客户要求高了",
+        "获客的解法不在获客本身——维系老客户ROI是开发新客的5倍"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。引导从获客焦虑到客户管理",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/658901234",
+      "title": "做外贸，怎么判断一个询盘有没有价值？",
+      "topic": "methodology",
+      "answers_est": 25,
+      "angles": [
+        "询盘价值的判断不只靠经验，靠客户信息记录",
+        "一个看似没价值的询盘，可能你同事三个月前就聊过了"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。适合切入客户信息共享+去重功能",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/662345678",
+      "title": "外贸人每天花多少时间在WhatsApp上跟进客户？有什么提高效率的方法？",
+      "topic": "tool_review",
+      "answers_est": 15,
+      "angles": [
+        "时间花在哪不重要，重要的是花完有没有留下记录",
+        "高效跟进的本质不是快，是信息结构化——今天聊了什么、下一步是什么、谁负责"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。切入WADesk的跟进记录+提醒+团队可见",
+      "pillar": "tool_review",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/668901234",
+      "title": "外贸工厂自己组建销售团队，需要注意什么？",
+      "topic": "methodology",
+      "answers_est": 15,
+      "angles": [
+        "建团队时最容易忽略的是客户管理系统",
+        "先上工具再招人，比招了人再补工具省事得多"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。工厂组建团队是WADesk最精准的目标客户场景",
+      "pillar": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/672123456",
+      "title": "外贸客户跟进表格怎么做？有没有模板？",
+      "topic": "tool_review",
+      "answers_est": 30,
+      "angles": [
+        "模板不重要，重要的是谁来填、填了谁看",
+        "Excel跟进的死穴不是表格不好，是信息散落在每个人电脑里"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。从Excel痛点切入WADesk团队共享",
+      "pillar": "tool_review",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/675678901",
+      "title": "外贸新人入职第一年最重要的事情是什么？",
+      "topic": "methodology",
+      "answers_est": 40,
+      "angles": [
+        "不是开发100个客户，是把你接触的每个客户都记录下来",
+        "哪怕现在不成单，一年后这些记录就是你最值钱的资产"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。从新人成长视角切入客户记录习惯",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/678901234",
+      "title": "外贸客户付款方式怎么谈？",
+      "topic": "industry_reality",
+      "answers_est": 30,
+      "angles": [
+        "付款方式不是谈出来的，是信任累积出来的",
+        "信任的来源之一：你对客户的跟进记录完整到让客户觉得你们很专业"
+      ],
+      "priority": "low",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。间接切入，适合做轻松的短回答",
+      "pillar": "industry_reality",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/682123456",
+      "title": "做外贸，WhatsApp聊天记录怎么备份和交接？",
+      "topic": "troubleshooting",
+      "answers_est": 10,
+      "angles": [
+        "聊天记录备份不只是防丢失，是客户交接的基础设施",
+        "销售离职了，3年的聊天记录=0，这才是外贸最大的隐性成本"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。直接对标WADesk聊天记录同步+客户交接",
+      "pillar": "troubleshooting",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/685678901",
+      "title": "外贸团队需要几个WhatsApp账号比较合理？",
+      "topic": "troubleshooting",
+      "answers_est": 10,
+      "angles": [
+        "不是数量问题，是管理问题——10个号管不好不如3个管得好",
+        "多账号管理的核心不是账号，是每个号上的客户分配和跟进状态"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。切入WADesk多号管理+客户分配功能",
+      "pillar": "troubleshooting",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/688901234",
+      "title": "外贸老客户维护有什么技巧？",
+      "topic": "methodology",
+      "answers_est": 25,
+      "angles": [
+        "老客户维护最好的技巧不是说话好听，是让他们觉得你没忘了他",
+        "定期跟进靠系统提醒，不靠脑子——人的记忆有上限"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。切入WADesk跟进提醒+客户分组",
+      "pillar": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/692123456",
+      "title": "外贸行业，销售飞单怎么防？",
+      "topic": "troubleshooting",
+      "answers_est": 15,
+      "angles": [
+        "防飞单不是不信任销售，是保护公司客户资产",
+        "号码脱敏+聊天监控+客户分配=飞单成本高到不划算",
+        "一个好的CRM让飞单的代价超过收益，自然就不飞了"
+      ],
+      "priority": "high",
+      "verified": false,
+      "used_on": [
+        "2026-07-01"
+      ],
+      "notes": "需验证URL。直接对标WADesk号码脱敏+防飞单",
+      "pillar": "troubleshooting",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/695678901",
+      "title": "外贸跟单和业务员应该分开吗？",
+      "topic": "methodology",
+      "answers_est": 20,
+      "angles": [
+        "分不分开不重要，关键是客户信息在谁那里",
+        "分开了但客户信息还在业务员手机里，等于没分"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。切入团队分工所需的信息共享工具",
+      "pillar": "methodology",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/698901234",
+      "title": "外贸B2B现在还有前途吗？",
+      "topic": "industry_reality",
+      "answers_est": 100,
+      "angles": [
+        "外贸B2B不是没前途，是不能用旧方法做了",
+        "有前途的外贸公司都在做客户资产化——不是只找新客，是把每个客户管好"
+      ],
+      "priority": "low",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。大话题易爆，但切入空间有限，优先级低",
+      "pillar": "industry_reality",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/702123456",
+      "title": "做外贸，你觉得最消耗精力的事情是什么？",
+      "topic": "methodology",
+      "answers_est": 30,
+      "angles": [
+        "最耗精力的不是找不到客户，是找到了但跟丢了",
+        "精力应该花在'让客户更信任你'，而不是'让客户别跑掉'"
+      ],
+      "priority": "normal",
+      "verified": false,
+      "used_on": [],
+      "notes": "需验证URL。适合短小精干回答，轻松但切中痛点",
+      "pillar": "methodology",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "PLACEHOLDER:如何在1688找到靠谱的工业品供应商",
+      "title": "如何在1688上找到靠谱的工业品供应商？",
+      "topic": "supplier_sourcing",
+      "pillar": "supplier_sourcing",
+      "buyer_stage": "consideration",
+      "angles": [
+        "采购渠道对比",
+        "验厂要点",
+        "避开贸易商的方法"
+      ],
+      "answers_est": 20,
+      "priority": "normal",
+      "verified": false,
+      "note": "搜索：1688工业品采购 或 怎么找工业品工厂"
+    },
+    {
+      "url": "PLACEHOLDER:外贸采购怎么防止被骗",
+      "title": "外贸采购怎么防止被骗？有哪些必须做的核验步骤？",
+      "topic": "supplier_sourcing",
+      "pillar": "supplier_sourcing",
+      "buyer_stage": "awareness",
+      "angles": [
+        "验厂清单",
+        "第三方核验",
+        "合同保护"
+      ],
+      "answers_est": 30,
+      "priority": "high",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:怎么判断工厂是真产能还是贸易商",
+      "title": "怎么判断一个工厂是真的有产能还是皮包公司？",
+      "topic": "supplier_sourcing",
+      "pillar": "supplier_sourcing",
+      "buyer_stage": "consideration",
+      "angles": [
+        "产能核验方法",
+        "实地考察要点",
+        "第三方报告"
+      ],
+      "answers_est": 15,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:外贸销售离职怎么交接客户",
+      "title": "外贸销售离职，客户怎么交接才不会丢？",
+      "topic": "team_building",
+      "pillar": "team_building",
+      "buyer_stage": "consideration",
+      "angles": [
+        "交接SOP",
+        "客户信息沉淀",
+        "老销售配合的激励"
+      ],
+      "answers_est": 40,
+      "priority": "high",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:外贸团队怎么管理效率最高",
+      "title": "外贸团队怎么管理效率最高？有哪些可以落地的做法？",
+      "topic": "team_building",
+      "pillar": "team_building",
+      "buyer_stage": "consideration",
+      "angles": [
+        "绩效考核",
+        "日常SOP",
+        "工具选型"
+      ],
+      "answers_est": 25,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:怎么防止外贸销售飞单",
+      "title": "怎么防止外贸销售飞单？除了合同条款还有什么办法？",
+      "topic": "team_building",
+      "pillar": "team_building",
+      "buyer_stage": "consideration",
+      "angles": [
+        "制度设计",
+        "工具管控",
+        "激励机制"
+      ],
+      "answers_est": 50,
+      "priority": "high",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:2026年外贸哪个行业比较好做",
+      "title": "2026年外贸哪个行业比较好做？",
+      "topic": "market_intelligence",
+      "pillar": "market_intelligence",
+      "buyer_stage": "awareness",
+      "angles": [
+        "区域机会",
+        "品类趋势",
+        "政策影响"
+      ],
+      "answers_est": 60,
+      "priority": "high",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:东南亚市场外贸好做吗",
+      "title": "东南亚市场现在做外贸还有机会吗？",
+      "topic": "market_intelligence",
+      "pillar": "market_intelligence",
+      "buyer_stage": "awareness",
+      "angles": [
+        "市场准入",
+        "本地化要点",
+        "竞争格局"
+      ],
+      "answers_est": 35,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:汽配出口还有机会吗",
+      "title": "汽配出口还有机会吗？现在入场晚不晚？",
+      "topic": "market_intelligence",
+      "pillar": "market_intelligence",
+      "buyer_stage": "awareness",
+      "angles": [
+        "市场需求",
+        "竞争格局",
+        "渠道变化"
+      ],
+      "answers_est": 20,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:外贸人一般用哪些工具",
+      "title": "外贸人一般用哪些工具提高效率？",
+      "topic": "cross_border_tools",
+      "pillar": "cross_border_tools",
+      "buyer_stage": "consideration",
+      "angles": [
+        "客户开发工具",
+        "沟通工具",
+        "管理工具"
+      ],
+      "answers_est": 45,
+      "priority": "high",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:海关数据工具哪个好用",
+      "title": "海关数据工具哪个好用？有没有性价比高的推荐？",
+      "topic": "cross_border_tools",
+      "pillar": "cross_border_tools",
+      "buyer_stage": "consideration",
+      "angles": [
+        "准确率对比",
+        "价格对比",
+        "使用门槛"
+      ],
+      "answers_est": 30,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:除了WhatsApp还有什么好用的外贸工具",
+      "title": "除了WhatsApp，还有什么比较好用的外贸客户沟通工具？",
+      "topic": "cross_border_tools",
+      "pillar": "cross_border_tools",
+      "buyer_stage": "consideration",
+      "angles": [
+        "邮件工具",
+        "CRM工具",
+        "社交工具"
+      ],
+      "answers_est": 25,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:外贸收款方式哪种最安全",
+      "title": "外贸收款方式哪种最安全？T/T、信用证、托收怎么选？",
+      "topic": "payment_logistics",
+      "pillar": "payment_logistics",
+      "buyer_stage": "consideration",
+      "angles": [
+        "安全性对比",
+        "成本对比",
+        "到账速度"
+      ],
+      "answers_est": 40,
+      "priority": "high",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:TT付款需要注意什么",
+      "title": "T/T付款需要注意什么？有哪些常见的坑？",
+      "topic": "payment_logistics",
+      "pillar": "payment_logistics",
+      "buyer_stage": "implementation",
+      "angles": [
+        "付款节点设计",
+        "收款账户安全",
+        "汇率风险管理"
+      ],
+      "answers_est": 20,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "url": "PLACEHOLDER:工业品出口物流怎么选",
+      "title": "工业品出口物流怎么选？海运、空运、铁路怎么决策？",
+      "topic": "payment_logistics",
+      "pillar": "payment_logistics",
+      "buyer_stage": "consideration",
+      "angles": [
+        "成本对比",
+        "时效对比",
+        "货物特性匹配"
+      ],
+      "answers_est": 15,
+      "priority": "normal",
+      "verified": false
+    },
+    {
+      "title": "用WhatsApp做外贸有什么好处？用WhatsApp做外贸有什么好处？",
+      "url": "https://www.zhihu.com/question/661235801",
+      "topic": "tool_review",
+      "priority": "normal",
+      "verified": false,
+      "angles": [
+        "用WhatsApp做外贸有什么好处？用WhatsApp做外贸有什么好处？ — 从WhatsApp 外贸角度切入",
+        "实操经验分享角度"
+      ],
+      "answers_est": 0,
+      "pillar": "tool_review",
+      "buyer_stage": "consideration",
+      "_discovered_at": "2026-06-29"
+    },
+    {
+      "title": "最近外贸人都在怎么开发客户啊？",
+      "url": "https://www.zhihu.com/question/554316494",
+      "topic": "customer_acquisition",
+      "priority": "normal",
+      "verified": false,
+      "angles": [
+        "最近外贸人都在怎么开发客户啊？ — 从WhatsApp 外贸角度切入",
+        "实操经验分享角度"
+      ],
+      "answers_est": 0,
+      "pillar": "customer_acquisition",
+      "buyer_stage": "consideration",
+      "_discovered_at": "2026-06-29"
+    },
+    {
+      "title": "外贸人用whatsapp营销 如何避免号被风控？",
+      "url": "https://www.zhihu.com/question/1924494918790915083",
+      "topic": "troubleshooting",
+      "priority": "normal",
+      "verified": false,
+      "angles": [
+        "外贸人用whatsapp营销 如何避免号被风控？ — 从WhatsApp 外贸角度切入",
+        "实操经验分享角度"
+      ],
+      "answers_est": 0,
+      "pillar": "troubleshooting",
+      "buyer_stage": "consideration",
+      "_discovered_at": "2026-06-29"
+    },
+    {
+      "title": "外贸营销能在WhatsApp上面推广吗？",
+      "url": "https://www.zhihu.com/question/662350148",
+      "topic": "tool_review",
+      "priority": "normal",
+      "verified": false,
+      "angles": [
+        "外贸营销能在WhatsApp上面推广吗？ — 从WhatsApp 外贸角度切入",
+        "实操经验分享角度"
+      ],
+      "answers_est": 0,
+      "pillar": "tool_review",
+      "buyer_stage": "consideration",
+      "_discovered_at": "2026-06-29"
+    },
+    {
+      "title": "WhatsApp在外贸中都有什么用？",
+      "url": "https://www.zhihu.com/question/660528932",
+      "topic": "tool_review",
+      "priority": "normal",
+      "verified": false,
+      "angles": [
+        "WhatsApp在外贸中都有什么用？ — 从WhatsApp 外贸角度切入",
+        "实操经验分享角度"
+      ],
+      "answers_est": 0,
+      "pillar": "tool_review",
+      "buyer_stage": "consideration",
+      "_discovered_at": "2026-06-29"
+    }
+  ]
+}

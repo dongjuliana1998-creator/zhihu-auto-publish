@@ -1,0 +1,164 @@
+{
+  "_note": "知乎通知中邀请回答的问题（优先级高于 question_bank.json）。手动从知乎通知/消息中复制过来。格式：url + title + source(谁邀请的) + received_at。URL 必须是 https://www.zhihu.com/question/{数字ID} 格式才会被 pick_questions.py 选中。",
+  "_version": "v1",
+  "_usage": "pick_questions.py 会自动优先选取 status=pending 且 URL 以数字ID结尾的问题，不足再从 question_bank.json 补充。被选中后状态会变成 selected。用 --add-invited 手动添加：python pick_questions.py --add-invited URL \"问题标题\"",
+  "questions": [
+    {
+      "url": "https://www.zhihu.com/question/1944041020263203373",
+      "title": "WhatsApp聊天怎么自动翻译成中文？",
+      "source": "外贸人Lee 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 13:31",
+      "status": "selected",
+      "pillar": "cross_border_tools",
+      "notes": "翻译工具类问题，可以用产品视角+行业案例回答。做汽配的朋友用翻译工具的真实场景。",
+      "buyer_stage": "consideration",
+      "selected_at": "2026-07-02"
+    },
+    {
+      "url": "https://www.zhihu.com/question/634814556",
+      "title": "外贸人现在都在用什么方式获客啊？",
+      "source": "毛大花 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 09:39",
+      "status": "selected",
+      "pillar": "customer_acquisition",
+      "notes": "获客渠道类问题，高流量话题。可以盘点社媒/B2B/展会/海关数据等，轻带WADesk。",
+      "buyer_stage": "awareness",
+      "selected_at": "2026-07-02"
+    },
+    {
+      "url": "https://www.zhihu.com/question/9150968248",
+      "title": "做外贸一个多月了，发邮件没有人理过，收到最多的就是退信，该怎么办？",
+      "source": "小酮不日办脱半 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 09:26",
+      "status": "selected",
+      "pillar": "customer_acquisition",
+      "notes": "外贸新人邮件开发信问题。可以讲邮件退信原因、邮箱验证、WhatsApp作为补充触达。",
+      "buyer_stage": "consideration",
+      "selected_at": "2026-07-02"
+    },
+    {
+      "url": "https://www.zhihu.com/question/7180825196",
+      "title": "whatsapp 被限制了怎么办呢？还能找回吗？",
+      "source": "是之也 邀请回答",
+      "type": "invitation",
+      "received_at": "2026-06-22 16:56",
+      "status": "pending",
+      "pillar": "troubleshooting",
+      "notes": "WhatsApp被限制/封号后的解封与养号。可以讲申诉流程、风控原因、备份重要性。",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/554885546",
+      "title": "WhatsApp如何养号，防止封号？",
+      "source": "海外AI社媒获客 邀请回答",
+      "type": "invitation",
+      "received_at": "2026-06-25 13:52",
+      "status": "pending",
+      "pillar": "troubleshooting",
+      "notes": "养号防封类问题。可以讲新号预热、发送频率、代理IP、号码验证等。",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2055642537524835263",
+      "title": "做外贸的同行们，你们整理大量海外采购商号码时，是怎么避开WhatsApp风控封号的？",
+      "source": "海外运营实录 邀请回答",
+      "type": "invitation",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "troubleshooting",
+      "notes": "号码整理与风控。",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "TODO_REPLACE_WITH_REAL_URL",
+      "title": "whatsapp 收不到验证码怎么办？",
+      "source": "贪杯来一杯 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 11:22",
+      "status": "pending",
+      "pillar": "troubleshooting",
+      "notes": "验证码接收问题。用TODO占位，需从知乎通知复制真实URL。",
+      "buyer_stage": "decision"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2055595445250961915",
+      "title": "2026 不同规模企业如何选择合适的海外静态 ip 方案？",
+      "source": "知抚用户G 邀请回答",
+      "type": "invitation",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "cross_border_tools",
+      "notes": "代理IP选择方案。",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/5261519615",
+      "title": "你们都是去哪里挖的外贸客户啊？",
+      "source": "Marie 外贸员日常 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "customer_acquisition",
+      "notes": "外贸获客渠道。",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/668024372",
+      "title": "外贸获客渠道有哪些？",
+      "source": "怪我警 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "customer_acquisition",
+      "notes": "获客渠道盘点。",
+      "buyer_stage": "awareness"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2055254942886139840",
+      "title": "工业品 B 端内贸转外贸从零起步，平台/独立站/社媒该怎么选？第一年投多少钱合适？",
+      "source": "骑老奶奶闯红灯 邀请回答",
+      "type": "invitation",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "industry_reality",
+      "notes": "工业品转型外贸渠道选择。",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2035066772341135248",
+      "title": "企业怎么做 WhatsApp 海外私域引流？",
+      "source": "出海获客主理人 邀请回答",
+      "type": "invitation",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "customer_acquisition",
+      "notes": "WhatsApp私域引流。",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "TODO_REPLACE_WITH_REAL_URL",
+      "title": "在琳琅满目的通讯工具中，你如何挑选最符合需求的？",
+      "source": "硬核说明书 的提问",
+      "type": "direct_question",
+      "received_at": "2026-06-22 11:15",
+      "status": "pending",
+      "pillar": "tool_review",
+      "notes": "通讯工具选型。用TODO占位，需从知乎通知复制真实URL。",
+      "buyer_stage": "consideration"
+    },
+    {
+      "url": "https://www.zhihu.com/question/2052348435634840506",
+      "title": "OA 办公系统和 CRM 客户管理可以合并一套否？",
+      "source": "青石ai办公 的提问",
+      "type": "direct_question",
+      "received_at": "2026-07-01 15:55",
+      "status": "pending",
+      "pillar": "tool_review",
+      "notes": "OA与CRM整合。",
+      "buyer_stage": "decision"
+    }
+  ]
+}

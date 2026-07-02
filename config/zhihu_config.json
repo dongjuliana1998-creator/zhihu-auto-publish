@@ -1,0 +1,57 @@
+{
+  "_version": "v7",
+  "_updated": "2026-06-29",
+  "_note": "v7: 分时段发布(09:00/12:00/13:00)，配图上传，10内容支柱",
+  "site": {
+    "homepage": "https://wadesk.io/cn",
+    "register": "https://team.wadesk.io/auth/register",
+    "brand_name": "WADesk",
+    "brand_desc": "AI 驱动的 WhatsApp CRM，让出海销售团队效率倍增"
+  },
+  "zhihu": {
+    "username": "",
+    "cookie_file": "zhihu_cookies.json",
+    "publish_scripts": {
+      "article": "publish_article_v4.py",
+      "answer": "publish_answer_v11.py",
+      "daily": "daily_publish_v2.py"
+    }
+  },
+  "daily_targets": {
+    "answers_per_day": 3,
+    "articles_per_day": 3
+  },
+  "posting_schedule": {
+    "batch_1": "09:00 — 搜题+生成内容+配图+发布第1批(1文+1答)",
+    "batch_2": "12:00 — 发布第2批(1文+1答)",
+    "batch_3": "13:00 — 发布第3批(1文+1答)"
+  },
+  "content_style": {
+    "answer_min_chars": 800,
+    "answer_max_chars": 1500,
+    "article_min_chars": 2200,
+    "article_max_chars": 3500,
+    "images_per_answer": 1,
+    "images_per_article": 2,
+    "tone": "干货工具内容，口语化有节奏，具体到行业和人，禁止AI模板",
+    "rules": [
+      "禁 Markdown 表格",
+      "禁虚构数据",
+      "禁「不是…而是…」句式",
+      "禁「标品」「非标品」",
+      "禁「随着全球化…」「本文将从…」「综上所述」等AI模板",
+      "禁「第一…第二…第三」",
+      "前80%干货，后20%自然带WADesk",
+      "每篇至少1处 Loss Aversion + 1处 Social Proof"
+    ]
+  },
+  "anti_detection": {
+    "min_wait_between_posts_sec": 45,
+    "max_wait_between_posts_sec": 120,
+    "typing_delay_ms": 5,
+    "viewport_width": 1440,
+    "viewport_height": 900,
+    "slow_mo": 50,
+    "human_pause_sec": [3, 6]
+  }
+}
