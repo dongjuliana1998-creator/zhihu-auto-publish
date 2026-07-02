@@ -11,6 +11,7 @@
   "zhihu": {
     "username": "",
     "cookie_file": "zhihu_cookies.json",
+    "editor_wait_timeout_sec": 45,
     "publish_scripts": {
       "article": "publish_article_v4.py",
       "answer": "publish_answer_v11.py",
@@ -27,8 +28,8 @@
     "batch_3": "13:00 — 发布第3批(1文+1答)"
   },
   "content_style": {
-    "answer_min_chars": 800,
-    "answer_max_chars": 1500,
+    "answer_min_chars": 300,
+    "answer_max_chars": 800,
     "article_min_chars": 2200,
     "article_max_chars": 3500,
     "images_per_answer": 1,

@@ -6,12 +6,23 @@ publish_answer_v11.py - 知乎回答发布（支持配图上传）
 """
 
 import sys, os, json, time, random, re, argparse
+import logging
 from pathlib import Path
+from zhihu_publish_common import (
+    IMAGES_DIR,
+    LOG_FILE,
+    PROJECT_ROOT,
+    confirm_or_continue,
+    cookie_file,
+    load_cookies as common_load_cookies,
+    resolve_answer_url,
+    setup_logging,
+    validate_content,
+    wait_for_editor,
+)
 
-ROOT = Path(__file__).parent
-IMAGES_DIR = ROOT / "images"
-LOG_FILE = ROOT / "publish_log.json"
-COOKIE_FILE = ROOT / "zhihu_cookies.json"
+ROOT = PROJECT_ROOT
+COOKIE_FILE = cookie_file()
 
 BASE_URL = "https://www.zhihu.com"
 
@@ -102,11 +113,13 @@ def upload_image_to_editor(page, image_path):
     
     # 等待图片出现在编辑器中
     max_wait = 15
+    image_detected = False
     for i in range(max_wait):
         time.sleep(1)
         try:
             imgs = page.locator(".public-DraftEditor-content img")
             if imgs.count() > 0:
+                image_detected = True
                 print(f"      [OK] 图片已出现 (等{i+1}s)")
                 break
         except:
@@ -136,7 +149,17 @@ def upload_image_to_editor(page, image_path):
         except:
             pass
     
-    return True
+    return image_detected
+
+
+def upload_image_with_retry(page, image_path, attempts=3):
+    for attempt in range(1, attempts + 1):
+        logging.info("Uploading answer image attempt %s/%s: %s", attempt, attempts, image_path)
+        if upload_image_to_editor(page, image_path):
+            return True
+        if attempt < attempts:
+            time.sleep(2 * attempt)
+    return False
 
 def type_text(page, text):
     """逐字输入文本到 Draft.js 编辑器"""
@@ -161,6 +184,10 @@ def publish_answer(question_url, content, image_path=None, dry_run=False):
     if dry_run:
         print(f"  [DRY-RUN] 仅模拟，不实际发布")
     print(f"{'='*60}")
+
+    warnings = validate_content(content, "answers")
+    if not confirm_or_continue(warnings, assume_yes=dry_run):
+        return {"success": False, "url": None, "error": "Stopped by content validation warnings"}
     
     if dry_run:
         print(f"\n[DRY-RUN] 模拟完成")
@@ -232,9 +259,13 @@ def publish_answer(question_url, content, image_path=None, dry_run=False):
             print("[3/6] 等待编辑器...")
             page.wait_for_load_state("networkidle", timeout=15000)
             time.sleep(3)
-            editor = None
-            best_h = 0
-            for attempt in range(15):
+            try:
+                editor = wait_for_editor(page)
+                best_h = 999
+            except TimeoutError:
+                editor = None
+                best_h = 0
+            for attempt in range(0 if editor else 15):
                 time.sleep(1)
                 editors = page.locator(".public-DraftEditor-content")
                 count = editors.count()
@@ -286,10 +317,13 @@ def publish_answer(question_url, content, image_path=None, dry_run=False):
                         continue
                     img_counter += 1
                     print(f"  [图片#{img_counter}] {seg.get('desc', '')}")
-                    ok = upload_image_to_editor(page, image_path)
+                    ok = upload_image_with_retry(page, image_path)
                     if ok:
                         print(f"  ✓ 配图#{img_counter} 插入成功")
                     else:
+                        result["error"] = f"Image upload failed after retries: {image_path}"
+                        browser.close()
+                        return result
                         print(f"  ✗ 配图#{img_counter} 失败")
                     time.sleep(1)
             
@@ -349,6 +383,7 @@ return 'not-found';
             # Step 6: 等待发布完成并获取 URL
             print("[6/6] 等待发布...")
             # 等待 URL 变化——发布成功后通常会跳转到答案页
+            resolved_url = resolve_answer_url(page, question_url, wait_sec=45)
             for i in range(20):
                 time.sleep(1)
                 cur_url = page.url
@@ -357,7 +392,7 @@ return 'not-found';
                 if i == 5:
                     print(f"  当前 URL: {cur_url}")
             
-            cur_url = page.url
+            cur_url = resolved_url or page.url
             
             if "/edit" in cur_url:
                 clean = re.sub(r'/edit/?$', '', cur_url)
@@ -376,6 +411,12 @@ return 'not-found';
                 except:
                     pass
                 if not result["error"]:
+                    resolved_url = resolved_url or resolve_answer_url(page, question_url, wait_sec=10)
+                    if not resolved_url:
+                        result["error"] = f"Answer URL not resolved after publish; current URL is {cur_url}"
+                        browser.close()
+                        return result
+                    cur_url = resolved_url
                     result["success"] = True
                     result["url"] = cur_url
                     print(f"  [LIKELY OK] 表单消失，URL: {cur_url}")
@@ -395,6 +436,7 @@ return 'not-found';
 
 
 def main():
+    setup_logging("publish_answer")
     parser = argparse.ArgumentParser()
     parser.add_argument("--q", help="Question URL")
     parser.add_argument("--file", help="Content file (answer_1.txt etc)")

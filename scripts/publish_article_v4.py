@@ -29,18 +29,30 @@ publish_article_v4.py - 知乎文章发布（支持配图上传）
 """
 
 import json, re, sys, time, random, argparse
+import logging
 from pathlib import Path
 from datetime import datetime
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+from zhihu_publish_common import (
+    ARTICLES_DIR,
+    DEBUG_DIR,
+    IMAGES_DIR,
+    LOG_FILE,
+    PROJECT_ROOT,
+    cookie_file,
+    confirm_or_continue,
+    load_cookies,
+    load_log,
+    mark_published as common_mark_published,
+    setup_logging,
+    validate_content,
+    wait_for_editor,
+)
 
 
 # ── 路径配置 ────────────────────────────────────────
-ROOT = Path(__file__).parent
-COOKIE_FILE = ROOT / "zhihu_cookies.json"
-ARTICLES_DIR = ROOT / "articles"
-IMAGES_DIR = ROOT / "images"
-LOG_FILE = ROOT / "publish_log.json"
-DEBUG_DIR = ROOT / "debug"
+ROOT = PROJECT_ROOT
+COOKIE_FILE = cookie_file()
 BASE_URL = "https://zhuanlan.zhihu.com"
 
 # 配图占位符正则
@@ -366,6 +378,21 @@ def upload_image_to_editor(page, image_path: Path) -> bool:
     return False
 
 
+def upload_image_with_retry(page, image_path: Path, attempts: int = 3) -> bool:
+    for attempt in range(1, attempts + 1):
+        logging.info("Uploading image attempt %s/%s: %s", attempt, attempts, image_path)
+        if upload_image_to_editor(page, image_path):
+            return True
+        close_upload_modal(page)
+        if attempt < attempts:
+            time.sleep(2 * attempt)
+            try:
+                click_image_button(page)
+            except Exception:
+                logging.debug("Re-open image modal failed", exc_info=True)
+    return False
+
+
 def input_title(page, title: str):
     """输入标题"""
     for sel in ["textarea", "input[class*='Input']", "[class*='TitleInput'] textarea"]:
@@ -403,6 +430,10 @@ def publish_article_with_images(
     """
     发布一篇知乎文章（支持配图）。
     """
+    warnings = validate_content(content, "articles")
+    if not confirm_or_continue(warnings, assume_yes=dry_run):
+        return {"success": False, "url": None, "error": "Stopped by content validation warnings"}
+
     if dry_run:
         segments = parse_content_with_images(content, has_images=bool(image_paths))
         n_images = sum(1 for s in segments if s['type'] == 'image')
@@ -502,7 +533,11 @@ def publish_article_with_images(
 
             # 3. 找到并点击正文编辑器
             print("[3/6] 定位正文编辑器...")
-            editor = find_editor(page)
+            try:
+                editor = wait_for_editor(page, prefer_body=True)
+            except TimeoutError as e:
+                editor = None
+                result["error"] = str(e)
             if not editor:
                 result["error"] = "未找到正文编辑器"
                 browser.close()
@@ -544,7 +579,7 @@ def publish_article_with_images(
                     # 点击图片按钮
                     click_image_button(page)
                     # 上传图片
-                    ok = upload_image_to_editor(page, img_path)
+                    ok = upload_image_with_retry(page, img_path)
                     if ok:
                         print(f"     ✓ 配图#{image_counter} 插入成功")
                         # 关闭可能残留的上传弹窗，避免遮挡后续操作
@@ -553,6 +588,10 @@ def publish_article_with_images(
                             print(f"     [WARN] 上传弹窗可能未关闭（继续尝试发布）")
                         time.sleep(0.5)
                     else:
+                        result["error"] = f"Image upload failed after retries: {img_path}"
+                        take_screenshot(page, "v4_img_upload_abort")
+                        browser.close()
+                        return result
                         print(f"     ✗ 配图#{image_counter} 插入失败（继续后续内容）")
 
                     # 图片后面可能需要换行继续文字
@@ -679,6 +718,7 @@ def publish_article_with_images(
 # ── 主入口 ──────────────────────────────────────────
 
 def main():
+    setup_logging("publish_article")
     parser = argparse.ArgumentParser(description="知乎文章发布（支持配图）")
     parser.add_argument("--file", help="指定发布文件")
     parser.add_argument("--all", action="store_true", help="发布所有")
