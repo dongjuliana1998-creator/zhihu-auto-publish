@@ -30,6 +30,7 @@ publish_article_v4.py - 知乎文章发布（支持配图上传）
 
 import json, re, sys, time, random, argparse
 import logging
+from contextlib import nullcontext
 from pathlib import Path
 from datetime import datetime
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
@@ -41,7 +42,8 @@ from zhihu_publish_common import (
     PROJECT_ROOT,
     cookie_file,
     confirm_or_continue,
-    load_cookies,
+    ensure_logged_in,
+    load_cookies_with_refresh,
     load_log,
     mark_published as common_mark_published,
     setup_logging,
@@ -62,6 +64,7 @@ IMAGE_PLACEHOLDER_RE = re.compile(r'【配图\s*(\d+)[:：]\s*(.+?)】')
 # ── 工具函数 ────────────────────────────────────────
 
 def load_cookies(context) -> bool:
+    return load_cookies_with_refresh(context)
     if not COOKIE_FILE.exists():
         print(f"[ERROR] Cookie 不存在: {COOKIE_FILE}")
         return False
@@ -90,6 +93,11 @@ def load_log():
 def save_log(log):
     with open(LOG_FILE, "w", encoding="utf-8") as f:
         json.dump(log, f, ensure_ascii=False, indent=2)
+
+
+class NoopBrowser:
+    def close(self):
+        pass
 
 
 def is_already_published(filename: str) -> bool:
@@ -426,6 +434,7 @@ def publish_article_with_images(
     image_paths: list = None,
     dry_run: bool = False,
     file_stem: str = None,
+    shared_context=None,
 ) -> dict:
     """
     发布一篇知乎文章（支持配图）。
@@ -483,21 +492,25 @@ def publish_article_with_images(
             except:
                 pass
 
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(
-            headless=False,
-            slow_mo=50,
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--no-first-run",
-            ]
-        )
-        context = browser.new_context(
-            viewport={"width": 1440, "height": 900},
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                       "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-            locale="zh-CN",
-        )
+    with (nullcontext() if shared_context else sync_playwright()) as pw:
+        if shared_context:
+            browser = NoopBrowser()
+            context = shared_context
+        else:
+            browser = pw.chromium.launch(
+                headless=False,
+                slow_mo=50,
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--no-first-run",
+                ]
+            )
+            context = browser.new_context(
+                viewport={"width": 1440, "height": 900},
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                           "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+                locale="zh-CN",
+            )
 
         try:
             cookies_ok = load_cookies(context)
@@ -518,6 +531,14 @@ def publish_article_with_images(
             page.goto(f"{BASE_URL}/write", wait_until="domcontentloaded", timeout=30000)
             time.sleep(random.uniform(3, 5))
 
+            if "signin" in page.url or "login" in page.url:
+                if ensure_logged_in(page, context):
+                    page.goto(f"{BASE_URL}/write", wait_until="domcontentloaded", timeout=30000)
+                    time.sleep(random.uniform(3, 5))
+                else:
+                    result["error"] = "Cookie refresh failed"
+                    browser.close()
+                    return result
             if "signin" in page.url or "login" in page.url:
                 result["error"] = "Cookie 已失效，请重新运行 zhihu_auth.py"
                 browser.close()

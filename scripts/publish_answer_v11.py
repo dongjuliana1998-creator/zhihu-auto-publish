@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 publish_answer_v11.py - 知乎回答发布（支持配图上传）
@@ -7,14 +7,16 @@ publish_answer_v11.py - 知乎回答发布（支持配图上传）
 
 import sys, os, json, time, random, re, argparse
 import logging
+from contextlib import nullcontext
 from pathlib import Path
 from zhihu_publish_common import (
+    ensure_logged_in,
     IMAGES_DIR,
     LOG_FILE,
     PROJECT_ROOT,
     confirm_or_continue,
     cookie_file,
-    load_cookies as common_load_cookies,
+    load_cookies_with_refresh,
     resolve_answer_url,
     setup_logging,
     validate_content,
@@ -25,6 +27,11 @@ ROOT = PROJECT_ROOT
 COOKIE_FILE = cookie_file()
 
 BASE_URL = "https://www.zhihu.com"
+
+
+class NoopBrowser:
+    def close(self):
+        pass
 
 def load_log():
     if LOG_FILE.exists():
@@ -170,7 +177,7 @@ def type_text(page, text):
         if random.random() < 0.15:
             time.sleep(random.uniform(0.1, 0.3))
 
-def publish_answer(question_url, content, image_path=None, dry_run=False):
+def publish_answer(question_url, content, image_path=None, dry_run=False, shared_context=None):
     """发布一条回答"""
     from playwright.sync_api import sync_playwright
     
@@ -197,40 +204,40 @@ def publish_answer(question_url, content, image_path=None, dry_run=False):
     if image_path and not any(s["type"] == "image" for s in segments):
         segments.append({"type": "image", "num": 1, "desc": "配图"})
     
-    with sync_playwright() as p:
+    with (nullcontext() if shared_context else sync_playwright()) as p:
         browser = None
         try:
-            print("[启动浏览器]")
-            browser = p.chromium.launch(
-                headless=False,
-                args=[
-                    "--disable-blink-features=AutomationControlled",
-                    "--no-sandbox",
-                    "--disable-dev-shm-usage",
-                ]
-            )
-            
-            ctx = browser.new_context(
-                viewport={"width": 1440, "height": 900},
-                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-                locale="zh-CN",
-                timezone_id="Asia/Shanghai",
-            )
-            
-            # 加载 Cookie
-            try:
-                if not COOKIE_FILE.exists():
-                    result["error"] = f"Cookie 不存在: {COOKIE_FILE}"
+            if shared_context:
+                browser = NoopBrowser()
+                ctx = shared_context
+            else:
+                print("[启动浏览器]")
+                browser = p.chromium.launch(
+                    headless=False,
+                    args=[
+                        "--disable-blink-features=AutomationControlled",
+                        "--no-sandbox",
+                        "--disable-dev-shm-usage",
+                    ]
+                )
+
+                ctx = browser.new_context(
+                    viewport={"width": 1440, "height": 900},
+                    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+                    locale="zh-CN",
+                    timezone_id="Asia/Shanghai",
+                )
+                # 加载 Cookie
+                try:
+                    if not load_cookies_with_refresh(ctx):
+                        result["error"] = f"Cookie refresh/load failed: {COOKIE_FILE}"
+                        browser.close()
+                        return result
+                    print("[OK] Cookie 已加载")
+                except Exception as e:
+                    result["error"] = f"Cookie 加载异常: {e}"
                     browser.close()
                     return result
-                with open(COOKIE_FILE, "r", encoding="utf-8") as f:
-                    cookies = json.load(f)
-                ctx.add_cookies(cookies)
-                print("[OK] Cookie 已加载")
-            except Exception as e:
-                result["error"] = f"Cookie 加载异常: {e}"
-                browser.close()
-                return result
             
             page = ctx.new_page()
             
@@ -239,6 +246,14 @@ def publish_answer(question_url, content, image_path=None, dry_run=False):
             page.goto(question_url, wait_until="domcontentloaded", timeout=30000)
             time.sleep(random.uniform(4, 6))
             
+            if "signin" in page.url or "login" in page.url:
+                if ensure_logged_in(page, ctx):
+                    page.goto(question_url, wait_until="domcontentloaded", timeout=30000)
+                    time.sleep(random.uniform(4, 6))
+                else:
+                    result["error"] = "Cookie refresh failed"
+                    browser.close()
+                    return result
             if "signin" in page.url or "login" in page.url:
                 result["error"] = "Cookie 过期"
                 browser.close()

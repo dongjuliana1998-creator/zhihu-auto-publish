@@ -8,6 +8,7 @@ import json
 import logging
 import re
 import time
+from contextlib import contextmanager
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -60,6 +61,85 @@ def load_cookies(context) -> bool:
     context.add_cookies(cookies)
     logging.info("Loaded %s cookies from %s", len(cookies), path)
     return True
+
+
+def refresh_cookies(headless: bool = False) -> bool:
+    """Run the QR-code login flow and save a fresh cookie file."""
+    try:
+        from zhihu_auth import ZhihuAuth
+    except Exception:
+        logging.exception("Failed to import zhihu_auth for cookie refresh")
+        return False
+    try:
+        logging.info("Refreshing Zhihu cookies via QR login flow")
+        return bool(ZhihuAuth(headless=headless).login())
+    except Exception:
+        logging.exception("Cookie refresh failed")
+        return False
+
+
+def load_cookies_with_refresh(context, *, refresh_on_missing: bool = True) -> bool:
+    if load_cookies(context):
+        return True
+    if not refresh_on_missing:
+        return False
+    if not refresh_cookies(headless=False):
+        return False
+    return load_cookies(context)
+
+
+def ensure_logged_in(page, context) -> bool:
+    """Refresh cookies once when Zhihu redirects to login/signin."""
+    if "signin" not in page.url and "login" not in page.url:
+        return True
+    logging.warning("Zhihu session expired at %s; starting cookie refresh", page.url)
+    if not refresh_cookies(headless=False):
+        return False
+    try:
+        context.clear_cookies()
+    except Exception:
+        logging.debug("clear_cookies failed before cookie reload", exc_info=True)
+    return load_cookies(context)
+
+
+def init_browser(pw):
+    return pw.chromium.launch(
+        headless=False,
+        slow_mo=50,
+        args=[
+            "--disable-blink-features=AutomationControlled",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--no-first-run",
+        ],
+    )
+
+
+def init_context(browser):
+    return browser.new_context(
+        viewport={"width": 1440, "height": 900},
+        user_agent=(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+        ),
+        locale="zh-CN",
+        timezone_id="Asia/Shanghai",
+    )
+
+
+@contextmanager
+def browser_session():
+    from playwright.sync_api import sync_playwright
+
+    with sync_playwright() as pw:
+        browser = init_browser(pw)
+        context = init_context(browser)
+        try:
+            if not load_cookies_with_refresh(context):
+                raise RuntimeError("Cookie missing or expired; refresh failed")
+            yield context
+        finally:
+            browser.close()
 
 
 def empty_log() -> dict:
@@ -180,9 +260,18 @@ def extract_answer_url_from_dom(page, question_url: str) -> str | None:
     qid_match = re.search(r"/question/(\d+)", question_url)
     qid = qid_match.group(1) if qid_match else None
     links = page.evaluate(
-        """() => Array.from(document.querySelectorAll('a[href*="/answer/"]'))
-            .map(a => a.href || a.getAttribute('href') || '')
-            .filter(Boolean)"""
+        """() => {
+            const urls = [];
+            const answerItems = document.querySelectorAll('.AnswerItem, [data-zop*="answer"]');
+            for (const item of answerItems) {
+                const id = item.getAttribute('name') || item.getAttribute('data-za-extra-module');
+                if (id && /\\d{5,}/.test(id)) urls.push(location.origin + location.pathname.replace(/\\/write\\/?$/, '') + '/answer/' + id.match(/\\d{5,}/)[0]);
+            }
+            for (const a of document.querySelectorAll('a[href*="/answer/"]')) {
+                urls.push(a.href || a.getAttribute('href') || '');
+            }
+            return urls.filter(Boolean);
+        }"""
     )
     for link in links:
         if "/answer/" not in link or "/write" in link:
@@ -207,6 +296,8 @@ def resolve_answer_url(page, question_url: str, wait_sec: int = 45) -> str | Non
 
 
 def content_limits(content_type: str) -> tuple[int, int]:
+    # content_config.json is the authority for publishing rules. zhihu_config.json
+    # keeps duplicate values only for human-readable site configuration.
     cfg = load_content_config()
     spec = cfg.get("answer_spec" if content_type == "answers" else "article_spec", {})
     return int(spec.get("min_chars", 0)), int(spec.get("max_chars", 10**9))
@@ -247,4 +338,3 @@ def confirm_or_continue(warnings: list[str], assume_yes: bool = False) -> bool:
     except EOFError:
         return False
     return answer in {"y", "yes"}
-

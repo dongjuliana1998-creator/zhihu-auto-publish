@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-daily_publish_v2.py - WADesk 知乎每日统一发布调度器 v2 (CODEX优化版)
+daily_publish_v2.py - WADesk 知乎每日统一发布调度器 v2
 
 支持：
-- 文章发布（直接调用 publish_article_v4 模块，不再走 subprocess）
-- 回答发布（直接调用 publish_answer_v11 模块，不再走 subprocess）
+- 文章发布（publish_article_v4.py，支持多张配图）
+- 回答发布（publish_answer_v11.py，支持1张配图）
 - 自动从文件名匹配配图（article_1.txt → images/article_1_img1.png, article_1_img2.png）
 - 配图未完成时跳过图片上传，先发布纯文本
 - 分批发布：--max-articles N --max-answers N
-- 发布前内容校验（字数、禁止模式）
 
 Usage:
-  python scripts/daily_publish_v2.py                  # publish all
-  python scripts/daily_publish_v2.py --max-articles 1 --max-answers 1  # 每批只发1篇
-  python scripts/daily_publish_v2.py --articles-only
-  python scripts/daily_publish_v2.py --answers-only
-  python scripts/daily_publish_v2.py --dry-run
-  python scripts/daily_publish_v2.py --stats
-  python scripts/daily_publish_v2.py --force          # skip already-published check
+  python daily_publish_v2.py                  # publish all
+  python daily_publish_v2.py --max-articles 1 --max-answers 1  # 每批只发1篇
+  python daily_publish_v2.py --articles-only
+  python daily_publish_v2.py --answers-only
+  python daily_publish_v2.py --dry-run
+  python daily_publish_v2.py --stats
+  python daily_publish_v2.py --force          # skip already-published check
 """
 
 import sys
@@ -27,14 +26,13 @@ import random
 import argparse
 from pathlib import Path
 from datetime import datetime
-
-# 从公共模块导入所有共享函数和常量
 from zhihu_publish_common import (
     ANSWERS_DIR,
     ARTICLES_DIR,
     IMAGES_DIR,
     LOG_FILE,
     PROJECT_ROOT,
+    browser_session,
     confirm_or_continue,
     is_published,
     load_log,
@@ -44,41 +42,15 @@ from zhihu_publish_common import (
 )
 
 ROOT = PROJECT_ROOT
+
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-
-# ─── 发布函数（直接 import 模块调用，不走 subprocess）───────────
-
-def publish_article(title, content, image_paths=None, dry_run=False):
-    """调用 publish_article_v4 模块发布文章"""
-    # 将 cwd 设为 scripts/ 目录，让 publish_article_v4 能找到 zhihu_publish_common
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from publish_article_v4 import publish_article_with_images
-    return publish_article_with_images(
-        title, content,
-        image_paths=image_paths,
-        dry_run=dry_run,
-    )
-
-
-def publish_answer(question_url, content, image_path=None, dry_run=False):
-    """调用 publish_answer_v11 模块发布回答"""
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from publish_answer_v11 import publish_answer
-    return publish_answer(
-        question_url, content,
-        image_path=image_path,
-        dry_run=dry_run,
-    )
-
-
-# ─── 辅助函数 ────────────────────────────────────────────────
 
 def find_images_for_article(article_file):
     """根据文章文件名查找对应的配图
     article_1.txt → images/article_1_img1.png, images/article_1_img2.png
     """
-    stem = article_file.stem
+    stem = article_file.stem  # article_1
     imgs = sorted(IMAGES_DIR.glob(f"{stem}_img*.png"))
     return [str(p) for p in imgs]
 
@@ -87,17 +59,62 @@ def find_image_for_answer(answer_file):
     """根据回答文件名查找对应的配图
     answer_1.txt → images/answer_1_img1.png
     """
-    stem = answer_file.stem
+    stem = answer_file.stem  # answer_1
     imgs = sorted(IMAGES_DIR.glob(f"{stem}_img*.png"))
     return str(imgs[0]) if imgs else None
 
 
-# ─── 显示函数 ────────────────────────────────────────────────
+def get_python_cmd():
+    """获取 Python 命令，优先使用 WorkBuddy 托管的 Python（确保 playwright 等依赖可用）"""
+    import shutil, os
+    # 尝试从环境变量获取
+    env_py = os.environ.get("WORKBUDDY_PYTHON") or os.environ.get("PYTHON_BIN")
+    if env_py and Path(env_py).exists():
+        return env_py
+    # 尝试固定路径（WorkBuddy 托管）
+    candidates = [
+        "C:/Users/Lenovo/.workbuddy/binaries/python/versions/3.13.12/python.exe",
+        "C:/Users/Lenovo/.workbuddy/binaries/python/envs/default/bin/python.exe",
+    ]
+    for p in candidates:
+        if Path(p).exists():
+            return p
+    # 回退到系统 PATH 中的 python
+    py = shutil.which("python") or shutil.which("python3")
+    if py:
+        return py
+    return "python"  # 最后尝试，让系统报清晰的错误
+
+
+def publish_article_v4(title, content, image_paths=None, dry_run=False, file_stem=None, shared_context=None):
+    from publish_article_v4 import publish_article_with_images
+
+    return publish_article_with_images(
+        title,
+        content,
+        image_paths=image_paths,
+        dry_run=dry_run,
+        file_stem=file_stem,
+        shared_context=shared_context,
+    )
+
+
+def publish_answer_v11(question_url, content, image_path=None, dry_run=False, shared_context=None):
+    from publish_answer_v11 import publish_answer
+
+    return publish_answer(
+        question_url,
+        content,
+        image_path=image_path,
+        dry_run=dry_run,
+        shared_context=shared_context,
+    )
+
 
 def print_banner():
     print(f"""
 {'=' * 62}
-    WADesk Zhihu Daily Publisher v2 (optimized)
+    WADesk Zhihu Daily Publisher v2
     Date: {TODAY}
     Status: Starting...
 {'=' * 62}
@@ -130,7 +147,7 @@ Published:
             print(f"  [Answer {i+1}] {r.get('url', '?')}")
 
     if a_fail > 0 or q_fail > 0:
-        print("\nFailed:")
+        print(f"\nFailed:")
         for i, r in enumerate(article_results):
             if not r.get("success"):
                 print(f"  [Article {i+1}] {r.get('error', '?')}")
@@ -144,7 +161,7 @@ def show_stats():
     if not LOG_FILE.exists():
         print("[INFO] No publish log yet")
         return
-    log = load_log()
+    log = load_log()  # 使用带异常处理的 load_log，而非直接 json.loads
     articles = log.get("articles", {})
     answers = log.get("answers", {})
     print(f"\n{'='*50}\n  Publish Stats\n{'='*50}")
@@ -158,8 +175,6 @@ def show_stats():
         print(f"      {v['url']}")
     print(f"\n  Last run: {log.get('last_run', 'N/A')}")
 
-
-# ─── 主流程 ───────────────────────────────────────────────────
 
 def main():
     setup_logging("daily_publish")
@@ -186,15 +201,27 @@ def main():
     answer_results = []
 
     SKIP_FILES = {"TEMPLATE.txt", "tmp_answer.txt", "tmp_article.txt"}
+    session_cm = None
+    shared_context = None
+
+    def get_shared_context():
+        nonlocal session_cm, shared_context
+        if args.dry_run:
+            return None
+        if shared_context is None:
+            session_cm = browser_session()
+            shared_context = session_cm.__enter__()
+        return shared_context
 
     # --- Publish Articles ---
     if not args.answers_only:
-        log = load_log()
+        log = load_log()  # 一次读取，避免列表推导中每文件读一次
         article_files = sorted([
             f for f in ARTICLES_DIR.glob("*.txt")
             if f.name not in SKIP_FILES
             and (args.force or not is_published(log, f.name))
         ])
+        # 限制数量（分批发布）
         if args.max_articles > 0:
             article_files = article_files[:args.max_articles]
         if article_files:
@@ -202,32 +229,29 @@ def main():
             for i, fp in enumerate(article_files, 1):
                 print(f"[{i}/{len(article_files)}] {fp.name}")
 
+                # 查找配图
                 imgs = find_images_for_article(fp)
                 if imgs:
                     print(f"  [IMG] Found {len(imgs)} image(s): {[Path(p).name for p in imgs]}")
                 else:
                     print(f"  [IMG] No images found, publishing text only")
 
+                # 读取标题和内容
                 lines = fp.read_text(encoding="utf-8").splitlines()
                 title = lines[0] if lines else fp.stem
+                # 跳过标题后的空行（兼容有/无空行格式）
                 body_start = 1
                 while body_start < len(lines) and not lines[body_start].strip():
                     body_start += 1
                 content = "\n".join(lines[body_start:]) if body_start < len(lines) else ""
 
-                # 发布前内容校验
-                warnings = validate_content(content, "articles")
-                if warnings and not args.dry_run:
-                    for w in warnings:
-                        print(f"  [WARN] {w}")
-                    if not confirm_or_continue(warnings, assume_yes=args.dry_run):
-                        print(f"  [SKIP] 用户取消发布")
-                        continue
-
-                result = publish_article(
+                # 调用 v4 发布
+                result = publish_article_v4(
                     title, content,
                     image_paths=imgs if imgs else None,
                     dry_run=args.dry_run,
+                    file_stem=fp.stem,
+                    shared_context=get_shared_context(),
                 )
                 article_results.append({"file": fp.name, "title": title, **result})
 
@@ -253,6 +277,7 @@ def main():
             if f.name not in SKIP_FILES
             and (args.force or not is_published(log, f.name))
         ])
+        # 限制数量（分批发布）
         if args.max_answers > 0:
             answer_files = answer_files[:args.max_answers]
         if answer_files:
@@ -260,8 +285,10 @@ def main():
             for i, fp in enumerate(answer_files, 1):
                 print(f"[{i}/{len(answer_files)}] {fp.name}")
 
+                # 读取URL和内容
                 lines = fp.read_text(encoding="utf-8").splitlines()
                 q_url = lines[0] if lines else ""
+                # 跳过 URL 后的空行（兼容有/无空行格式）
                 body_start = 1
                 while body_start < len(lines) and not lines[body_start].strip():
                     body_start += 1
@@ -271,25 +298,19 @@ def main():
                     print(f"  [SKIP] No valid question URL in file")
                     continue
 
+                # 查找配图
                 img = find_image_for_answer(fp)
                 if img:
                     print(f"  [IMG] Found image: {Path(img).name}")
                 else:
                     print(f"  [IMG] No image found, publishing text only")
 
-                # 发布前内容校验
-                warnings = validate_content(content, "answers")
-                if warnings and not args.dry_run:
-                    for w in warnings:
-                        print(f"  [WARN] {w}")
-                    if not confirm_or_continue(warnings, assume_yes=args.dry_run):
-                        print(f"  [SKIP] 用户取消发布")
-                        continue
-
-                result = publish_answer(
+                # 调用 v11 发布
+                result = publish_answer_v11(
                     q_url, content,
                     image_path=img if img else None,
                     dry_run=args.dry_run,
+                    shared_context=get_shared_context(),
                 )
                 answer_results.append({"file": fp.name, "title": fp.stem, **result})
 
@@ -306,6 +327,9 @@ def main():
                     time.sleep(wait)
         else:
             print("\n[INFO] No pending answers")
+
+    if session_cm:
+        session_cm.__exit__(None, None, None)
 
     print_summary(article_results, answer_results, start_time)
 
