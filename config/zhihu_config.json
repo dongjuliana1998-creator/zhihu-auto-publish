@@ -1,7 +1,7 @@
 {
   "_version": "v7",
   "_updated": "2026-06-29",
-  "_note": "v7: 分时段发布(09:00/12:00/13:00)，配图上传，10内容支柱",
+  "_note": "v7: 分时段发布(09:00/12:00/13:00)，不配图，10内容支柱",
   "site": {
     "homepage": "https://wadesk.io/cn",
     "register": "https://team.wadesk.io/auth/register",
@@ -23,7 +23,7 @@
     "articles_per_day": 3
   },
   "posting_schedule": {
-    "batch_1": "09:00 — 搜题+生成内容+配图+发布第1批(1文+1答)",
+    "batch_1": "09:00 — 搜题+生成内容+发布第1批(1文+1答)",
     "batch_2": "12:00 — 发布第2批(1文+1答)",
     "batch_3": "13:00 — 发布第3批(1文+1答)"
   },
@@ -32,8 +32,8 @@
     "answer_max_chars": 800,
     "article_min_chars": 2200,
     "article_max_chars": 3500,
-    "images_per_answer": 1,
-    "images_per_article": 2,
+    "images_per_answer": 0,
+    "images_per_article": 0,
     "tone": "干货工具内容，口语化有节奏，具体到行业和人，禁止AI模板",
     "rules": [
       "禁 Markdown 表格",

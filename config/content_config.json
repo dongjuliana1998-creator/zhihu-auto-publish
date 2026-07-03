@@ -583,7 +583,7 @@
   "article_spec": {
     "min_chars": 2200,
     "max_chars": 3500,
-    "min_image_placeholders": 2,
+    "min_image_placeholders": 0,
     "content_types": {
       "_priority_order": "优先使用高流量型。每篇文章明确属于以下之一。",
       "comparison": {
@@ -657,8 +657,7 @@
       "标题使用 headline_formulas 中文章型公式",
       "前80%：按所选 content_type 的结构写干货",
       "后20%：自然带出 WADesk（使用 feature_to_benefit_to_outcome 转化链路）",
-      "末尾 CTA：不超过40字短句，纯自然表达（不要促销语气）",
-      "配图建议（2张图）"
+      "末尾 CTA：不超过40字短句，纯自然表达（不要促销语气）"
     ],
     "hard_rules": [
       "正文不出现'标品''非标品'",
@@ -892,8 +891,9 @@
     }
   ],
   "image_spec": {
-    "generate_per_piece": 2,
-    "max_product_images": 1,
+    "_note": "现阶段不配图（2026-07-03确认）。配图脚本保留，后期可能重新启用。",
+    "generate_per_piece": 0,
+    "max_product_images": 0,
     "product_image_position": "文末工具部分",
     "preferred_types": [
       "对比图（方案对比/行业对比，信息图风格）",
